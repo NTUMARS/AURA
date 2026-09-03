@@ -44,7 +44,7 @@ class P(HTMLParser):
             self.links.append(a)
         for key in ('data-spy-for', 'aria-controls'):
             if key in a: self.refs.append(('id', key, '#' + a[key]))
-        for key in ('data-src', 'data-poster'):
+        for key in ('data-src', 'data-poster', 'data-clip'):
             if key in a: self.refs.append((tag, key, a[key]))
     def handle_endtag(self, tag):
         while self.stack and self.stack[-1][0] != tag: self.stack.pop()
@@ -98,7 +98,20 @@ for im in p.imgs:
 if p.placeholders:
     (errors if STRICT else warns).append(f'{p.placeholders} data-placeholder slots remain')
 
-# 6. media budget
+# 6. data files
+import json as _json
+for f in (SITE / 'assets/data').glob('*.json'):
+    try:
+        d = _json.loads(f.read_text())
+        prog = d['progress']; n = len(prog)
+        assert all(prog[i] < prog[i+1] for i in range(n-1)), 'progress not monotone'
+        for k, m in d['modes'].items():
+            for key in ('mean', 'lo', 'hi'):
+                if key in m: assert len(m[key]) == n, f'{k}.{key} length'
+    except Exception as e:
+        errors.append(f'{f.relative_to(SITE)}: {e}')
+
+# 7. media budget
 vids = list((SITE / 'assets/videos').rglob('*.mp4'))
 total = sum(f.stat().st_size for f in vids)
 big = [f for f in vids if f.stat().st_size > 15e6]

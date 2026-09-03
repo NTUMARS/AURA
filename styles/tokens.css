@@ -1,20 +1,19 @@
-/* AURA — design tokens ("journal plate", warm white)
-   Two neutrals, one accent axis, three type families, one radius scale.
-   The only colour motif is the paper's own uncertainty axis:
-   vermilion (high uncertainty) ↔ teal (low uncertainty).
+/* AURA — design tokens ("journal plate", Swiss white)
+   Cool near-white ground, ink text, one accent axis (vermilion ↔ teal = the
+   paper's own uncertainty colours), three type families, one radius scale.
    Variable names are kept from the MARS/TF-ART skeleton so ported blocks resolve. */
 
 :root {
   /* --- surfaces & ink --- */
-  --bg:             #F7F5F0;   /* paper ground — never pure white */
+  --bg:             #F7F8FA;   /* page ground — cool near-white */
   --bg-elev:        #FFFFFF;   /* plates, cards, chip tracks */
-  --bg-elev-2:      #F1EEE7;   /* alternate bands, chip rails */
-  --border:         #E4E0D7;   /* hairlines */
-  --border-strong:  #CFCAC0;
-  --text-display:   #15171A;
-  --text:           #24272B;
-  --text-soft:      #3F444A;
-  --text-muted:     #6E747B;
+  --bg-elev-2:      #EEF0F3;   /* alternate bands, chip rails, nav band */
+  --border:         #E1E4E8;   /* hairlines */
+  --border-strong:  #C9CED5;
+  --text-display:   #101418;
+  --text:           #1F2429;
+  --text-soft:      #3C434B;
+  --text-muted:     #6B737C;
 
   /* --- accent axis --- */
   --accent:         #B23A2A;   /* vermilion — high uncertainty, eyebrows, "ours" */
@@ -25,17 +24,21 @@
   --teal-hot:       #216B75;
   --teal-soft:      rgba(42, 127, 138, 0.10);
   --teal-line:      rgba(42, 127, 138, 0.45);
-  --accent-warm:    #6E747B;   /* mono labels (legacy alias) */
+  --accent-warm:    #6B737C;   /* mono labels (legacy alias) */
   --axis: linear-gradient(90deg, #B23A2A 0%, #D9A59B 38%, #B9D3D6 62%, #2A7F8A 100%);
 
+  /* --- live chart mode colours (Fig. 7B hues, deepened for contrast on white) --- */
+  --live-upper:     #3A948E;
+  --live-lower:     #3F7FB5;
+
   /* --- ink buttons --- */
-  --ink-btn:        #15171A;
+  --ink-btn:        #101418;
   --ink-btn-hover:  #000000;
 
   /* --- type --- */
-  --display:        'Newsreader', Georgia, 'Times New Roman', serif;
-  --display-serif:  'Newsreader', Georgia, 'Times New Roman', serif;
-  --serif-display:  'Newsreader', Georgia, 'Times New Roman', serif;
+  --display:        'Libre Caslon Display', 'Libre Caslon Text', Georgia, 'Times New Roman', serif;
+  --display-serif:  var(--display);
+  --serif-display:  var(--display);
   --serif-body:     'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', system-ui, sans-serif;
   --sans:           'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', system-ui, sans-serif;
   --mono:           'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
@@ -49,15 +52,15 @@
   --text-2xl:  26px;
   --text-3xl:  36px;
   --text-4xl:  50px;
-  --hero:      clamp(40px, 5.6vw, 78px);
-  --section-h: clamp(34px, 3.6vw, 52px);
+  --hero:      clamp(38px, 4.5vw, 64px);
+  --section-h: clamp(32px, 3.3vw, 46px);
 
-  --leading-tight:  1.04;
+  --leading-tight:  1.06;
   --leading-snug:   1.3;
   --leading-normal: 1.65;
   --leading-loose:  1.8;
 
-  --tracking-tight:  -0.018em;
+  --tracking-tight:  -0.02em;
   --tracking-normal: 0;
   --tracking-wide:   0.08em;
   --tracking-wider:  0.14em;
@@ -93,9 +96,9 @@
   --d-base:     220ms;
   --d-slow:     360ms;
 
-  /* --- depth (graphite, restrained) --- */
-  --shadow-plate: 0 1px 2px rgba(21, 23, 26, 0.04), 0 24px 48px -36px rgba(21, 23, 26, 0.28);
-  --shadow-card:  0 0 0 1px var(--border), 0 1px 2px rgba(21, 23, 26, 0.04), 0 18px 40px -30px rgba(21, 23, 26, 0.22);
-  --shadow-elev:  0 0 0 1px var(--border-strong), 0 4px 10px -3px rgba(21, 23, 26, 0.08), 0 30px 60px -28px rgba(21, 23, 26, 0.26);
+  /* --- depth (cool graphite, restrained) --- */
+  --shadow-plate: 0 1px 2px rgba(16, 20, 24, 0.04), 0 24px 48px -36px rgba(16, 20, 24, 0.26);
+  --shadow-card:  0 0 0 1px var(--border), 0 1px 2px rgba(16, 20, 24, 0.04), 0 18px 40px -30px rgba(16, 20, 24, 0.20);
+  --shadow-elev:  0 0 0 1px var(--border-strong), 0 4px 10px -3px rgba(16, 20, 24, 0.08), 0 30px 60px -28px rgba(16, 20, 24, 0.24);
   --shadow-btn:   0 8px 20px -12px rgba(0, 0, 0, 0.5);
 }

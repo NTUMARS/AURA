@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-asset-v="2" class="no-js">
+<html lang="en" data-asset-v="3" class="no-js">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -35,11 +35,11 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
-  <link rel="stylesheet" href="styles/tokens.css?v=2" />
-  <link rel="stylesheet" href="styles/reset.css?v=2" />
-  <link rel="stylesheet" href="styles/layout.css?v=2" />
-  <link rel="stylesheet" href="styles/components.css?v=2" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="styles/tokens.css?v=3" />
+  <link rel="stylesheet" href="styles/reset.css?v=3" />
+  <link rel="stylesheet" href="styles/layout.css?v=3" />
+  <link rel="stylesheet" href="styles/components.css?v=3" />
   <script>(function(d){d.classList.remove('no-js');if(/[?&]static\b/.test(location.search))d.classList.add('is-static');})(document.documentElement)</script>
 </head>
 <body>
@@ -63,12 +63,10 @@
 <!-- ============================== HERO ============================== -->
 <header id="top" class="hero">
   <div class="container hero__inner">
-    <p class="eyebrow hero__eyebrow" data-reveal>MARS Lab · Nanyang Technological University · 2026</p>
-    <h1 class="hero__title" data-reveal style="--reveal-delay: 60ms">Adaptive Uncertainty Enables Emergent Robot Behaviors Without Scaling</h1>
-    <p class="hero__method" data-reveal style="--reveal-delay: 140ms"><b>AURA</b> <i aria-hidden="true"></i> Adaptive Uncertainty for Robotic Actions</p>
-    <p class="hero__tagline" data-reveal style="--reveal-delay: 200ms">The same adaptivity that makes a policy efficient also makes it creative.</p>
+    <h1 class="hero__title" data-reveal>Adaptive Uncertainty Enables Emergent<br class="br-desk" /> Robot Behaviors Without Scaling</h1>
+    <p class="hero__method" data-reveal style="--reveal-delay: 80ms"><b>AURA</b> <i aria-hidden="true"></i> Adaptive Uncertainty for Robotic Actions</p>
 
-    <p class="hero__authors" data-reveal style="--reveal-delay: 280ms">
+    <p class="hero__authors" data-reveal style="--reveal-delay: 140ms">
       <a href="https://jiajindou.github.io/" target="_blank" rel="noopener">Jindou Jia</a><sup>*‡</sup>,
       <a href="https://morpheus-an.github.io/" target="_blank" rel="noopener">Tuo An</a><sup>*</sup>,
       Yuxuan Hu<sup>*</sup>,
@@ -78,14 +76,14 @@
       <a href="https://jingliangli.com" target="_blank" rel="noopener">Jingliang Li</a>,
       <a href="https://marsyang.site/" target="_blank" rel="noopener">Jianfei Yang</a><sup>†</sup>
     </p>
-    <p class="hero__affil" data-reveal style="--reveal-delay: 320ms"><a href="https://marslab.tech/" target="_blank" rel="noopener">MARS Lab</a>, Nanyang Technological University</p>
-    <p class="hero__marks" data-reveal style="--reveal-delay: 340ms">
+    <p class="hero__affil" data-reveal style="--reveal-delay: 180ms"><a href="https://marslab.tech/" target="_blank" rel="noopener">MARS Lab</a>, Nanyang Technological University</p>
+    <p class="hero__marks" data-reveal style="--reveal-delay: 200ms">
       <span><sup>*</sup>Equal contribution</span>
       <span><sup>‡</sup>Project lead</span>
       <span><sup>†</sup>Corresponding author</span>
     </p>
 
-    <div class="hero__cta" data-reveal style="--reveal-delay: 400ms">
+    <div class="hero__cta" data-reveal style="--reveal-delay: 240ms">
       <a class="btn btn--soon" href="#bibtex" data-placeholder="paper" aria-disabled="true" title="PDF coming soon">
         <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v5h5M6 3h8l5 5v13H6V3z"/></svg>
         Paper
@@ -102,36 +100,36 @@
   </div>
 </header>
 
-<!-- ============================== FILM STRIP ============================== -->
-<section id="overview" class="strip-section" data-spy-section aria-label="Overview">
-  <div class="container container--wide">
-    <ol class="strip" role="list">
-      <li data-reveal>
-        <a class="strip__item" href="#s01" data-spy-for="s01">
-          <div class="strip__frame"><video src="assets/videos/strip/01_learning.mp4?v=2" poster="assets/posters/strip_01_learning.jpg?v=2" muted loop playsinline autoplay preload="metadata" data-autoplay aria-label="AURA picking a vegetable after limited training"></video></div>
-          <div class="strip__meta"><span class="strip__num">01</span><span class="strip__label">Learns faster<span class="strip__sub">Fewer training steps to the same success.</span></span></div>
-        </a>
-      </li>
-      <li data-reveal style="--reveal-delay: 80ms">
-        <a class="strip__item" href="#s02" data-spy-for="s02">
-          <div class="strip__frame"><video src="assets/videos/strip/02_multimodal.mp4?v=2" poster="assets/posters/strip_02_multimodal.jpg?v=2" muted loop playsinline autoplay preload="metadata" data-autoplay aria-label="AURA grasping a cup by its handle"></video></div>
-          <div class="strip__meta"><span class="strip__num">02</span><span class="strip__label">Multimodal when it matters<span class="strip__sub">Stochastic only at the branching moment.</span></span></div>
-        </a>
-      </li>
-      <li data-reveal style="--reveal-delay: 160ms">
-        <a class="strip__item" href="#s03" data-spy-for="s03">
-          <div class="strip__frame"><video src="assets/videos/strip/03_fast.mp4?v=2" poster="assets/posters/strip_03_fast.jpg?v=2" muted loop playsinline autoplay preload="metadata" data-autoplay aria-label="AURA reaching an object along a direct path"></video></div>
-          <div class="strip__meta"><span class="strip__num">03</span><span class="strip__label">Fast and smooth<span class="strip__sub">One denoising step where nothing branches.</span></span></div>
-        </a>
-      </li>
-      <li data-reveal style="--reveal-delay: 240ms">
-        <a class="strip__item" href="#s04" data-spy-for="s04">
-          <div class="strip__frame"><video src="assets/videos/strip/04_emergent.mp4?v=2" poster="assets/posters/strip_04_emergent.jpg?v=2" muted loop playsinline autoplay preload="metadata" data-autoplay aria-label="AURA tidying a table in an order never demonstrated"></video><span class="cmp__badge">6×</span></div>
-          <div class="strip__meta"><span class="strip__num">04</span><span class="strip__label">Emergent modes<span class="strip__sub">Orders no expert ever showed.</span></span></div>
-        </a>
-      </li>
-    </ol>
-    <p class="strip__legend" data-reveal style="--reveal-delay: 300ms">One inferred uncertainty signal schedules <b>how much to remember</b>, <b>how long to think</b>, and <b>how far to act</b>.</p>
+<!-- ============================== HERO SHOWCASE ============================== -->
+<section id="overview" class="showcase-section" data-spy-section aria-label="Overview">
+  <div class="container">
+    <div class="showcase" data-showcase data-dwell="8000" data-reveal style="--reveal-delay: 300ms">
+      <div class="showcase__frame">
+        <video class="showcase__layer is-front" src="assets/videos/pickveg/carrot.mp4?v=3" poster="assets/posters/pickveg_carrot.jpg?v=3" muted playsinline preload="metadata" aria-label="Real-robot rollouts of the AURA policy"></video>
+        <video class="showcase__layer" poster="assets/posters/pickcup_handle2.jpg?v=3" muted playsinline preload="metadata" aria-hidden="true"></video>
+        <span class="showcase__tag" data-showcase-tag>Galaxea R1 Lite · Pick Vegetable</span>
+        <span class="cmp__badge" data-showcase-badge hidden></span>
+      </div>
+      <ol class="showcase__chips" role="list">
+        <li>
+          <button type="button" class="showcase__chip is-active" aria-pressed="true" data-clip="assets/videos/pickveg/carrot.mp4?v=3" data-poster="assets/posters/pickveg_carrot.jpg?v=3" data-tag="Galaxea R1 Lite · Pick Vegetable" data-badge=""><span class="showcase__bar" aria-hidden="true"></span><span class="showcase__num">01</span><span class="showcase__label">Learns faster</span><span class="showcase__sub">Fewer training steps to the same success.</span></button>
+          <a class="showcase__go" href="#s01">Section 01 ↗</a>
+        </li>
+        <li>
+          <button type="button" class="showcase__chip" aria-pressed="false" data-clip="assets/videos/pickcup/handle2.mp4?v=3" data-poster="assets/posters/pickcup_handle2.jpg?v=3" data-tag="Galaxea R1 Lite · Pick Cup" data-badge=""><span class="showcase__bar" aria-hidden="true"></span><span class="showcase__num">02</span><span class="showcase__label">Multimodal when it matters</span><span class="showcase__sub">Stochastic only at the branching moment.</span></button>
+          <a class="showcase__go" href="#s02">Section 02 ↗</a>
+        </li>
+        <li>
+          <button type="button" class="showcase__chip" aria-pressed="false" data-clip="assets/videos/fast/aura.mp4?v=3" data-poster="assets/posters/fast_aura.jpg?v=3" data-tag="Galaxea R1 Lite · Pick &amp; Place Peach" data-badge=""><span class="showcase__bar" aria-hidden="true"></span><span class="showcase__num">03</span><span class="showcase__label">Fast and smooth</span><span class="showcase__sub">One denoising step where nothing branches.</span></button>
+          <a class="showcase__go" href="#s03">Section 03 ↗</a>
+        </li>
+        <li>
+          <button type="button" class="showcase__chip" aria-pressed="false" data-clip="assets/videos/table/emergent_2134.mp4?v=3" data-poster="assets/posters/table_emergent_2134.jpg?v=3" data-tag="Galaxea R1 Lite · Table Tidying" data-badge="6×"><span class="showcase__bar" aria-hidden="true"></span><span class="showcase__num">04</span><span class="showcase__label">Emergent modes</span><span class="showcase__sub">An order no expert ever showed.</span></button>
+          <a class="showcase__go" href="#s04">Section 04 ↗</a>
+        </li>
+      </ol>
+      <p class="showcase__legend">One inferred uncertainty signal schedules <b>how much to remember</b>, <b>how long to think</b>, and <b>how far to act</b>.</p>
+    </div>
   </div>
 </section>
 
@@ -142,7 +140,7 @@
       <div data-reveal>
         <p class="eyebrow eyebrow--accent">Abstract</p>
         <span class="axis-rule"></span>
-        <p class="abstract__lead">Humans and animals act adaptively. Under uncertainty they recruit less habit, think longer, and move cautiously, while dispatching fast routines when the situation is familiar. <em>Current robot policies, by contrast, are rigid.</em></p>
+        <p class="abstract__lead">Humans and animals act adaptively. Under uncertainty they recruit less habit, think longer, and move cautiously, while dispatching fast routines when the situation is familiar. <span class="lead-accent">Current robot policies, by contrast, are rigid.</span></p>
       </div>
       <div class="abstract__body prose" data-reveal style="--reveal-delay: 100ms">
         <p>Whether the moment is familiar or uncertain, they always infer from the same span of observation, for the same amount of time, to produce the same length of execution, which limits their flexibility in the complex, ever-changing real world. This paper presents the <b>AURA</b> policy, enabling a robot to judge how action-uncertain each moment is and adapt its behavior accordingly.</p>
@@ -185,7 +183,7 @@
     <header class="sec-head" data-reveal>
       <p class="eyebrow eyebrow--accent">How it works</p>
       <span class="axis-rule"></span>
-      <h2 class="section-title">One inferred uncertainty, <em>three adaptive behaviors</em></h2>
+      <h2 class="section-title">One inferred uncertainty, <span class="t-soft">three adaptive behaviors</span></h2>
       <p class="section-lead">AURA keeps the flow-policy backbone and changes one thing: where generation starts. Instead of a fixed Gaussian, a lightweight stochastic inference network (ScoNet) predicts, at every step, how much noise the current context warrants. Generation is anchored on the recent action history and noise is injected only where the demonstrations are genuinely diverse.</p>
     </header>
 
@@ -193,8 +191,8 @@
       <figure class="plate" data-reveal>
         <div class="plate__frame">
           <picture>
-            <source srcset="assets/images/framework_a.webp?v=2" type="image/webp" />
-            <img width="2415" height="1922" src="assets/images/framework_a.png?v=2" alt="AURA policy structure: an observation encoder conditions a stochastic inference network that predicts a per-dimension noise weight; the flow network transports a mixture of recent action history and noise into an action chunk; the same weight gates the observation window, the number of denoising steps and the executed horizon." loading="lazy" decoding="async" />
+            <source srcset="assets/images/framework_a.webp?v=3" type="image/webp" />
+            <img width="2415" height="1922" src="assets/images/framework_a.png?v=3" alt="AURA policy structure: an observation encoder conditions a stochastic inference network that predicts a per-dimension noise weight; the flow network transports a mixture of recent action history and noise into an action chunk; the same weight gates the observation window, the number of denoising steps and the executed horizon." loading="lazy" decoding="async" />
           </picture>
         </div>
         <figcaption class="plate__meta">
@@ -212,7 +210,7 @@
         </div>
         <div class="prose">
           <p>where <i>h</i> is the recent action history, <i>ε</i> is Gaussian noise and <i>w</i> ∈ [0, 1] is ScoNet's per-dimension weight. With <i>w</i> = 0 the policy is the deterministic, history-anchored A2A; with <i>w</i> = 1 it is standard flow matching. AURA lives in between and moves along that axis from moment to moment.</p>
-          <p><strong>Three losses calibrate the weight end-to-end.</strong> The flow-matching loss rewards a source the velocity field can transport cleanly. A reconstruction loss, gated by (1 − <i>w</i>) with a stop-gradient, encourages single-step generation on near-deterministic dimensions. A <em>diversity loss</em> supplies the opposing pressure: it retrieves the <i>K</i> nearest demonstrations in feature space and penalizes any source narrower than the spread of their futures. At equilibrium <i>w</i> settles at the smallest noise that still covers the experts' diversity, and a theorem shows this condition holds for every network capacity.</p>
+          <p><strong>Three losses calibrate the weight end-to-end.</strong> The flow-matching loss rewards a source the velocity field can transport cleanly. A reconstruction loss, gated by (1 − <i>w</i>) with a stop-gradient, encourages single-step generation on near-deterministic dimensions. A <strong>diversity loss</strong> supplies the opposing pressure: it retrieves the <i>K</i> nearest demonstrations in feature space and penalizes any source narrower than the spread of their futures. At equilibrium <i>w</i> settles at the smallest noise that still covers the experts' diversity, and a theorem shows this condition holds for every network capacity.</p>
         </div>
       </div>
     </div>
@@ -220,7 +218,7 @@
     <div class="sched">
       <article class="sched__card" data-reveal>
         <p class="sched__num"><span>Observation schedule</span><b>w̄ ↑ → remember less</b></p>
-        <h3 class="sched__title">Remember <em>less</em></h3>
+        <h3 class="sched__title">Remember <span>less</span></h3>
         <div class="sched__body">
           <p>Under high uncertainty the policy conditions on a shorter window of past frames, so it is not locked into the route it arrived on. Under low uncertainty it keeps the full history.</p>
         </div>
@@ -228,7 +226,7 @@
       </article>
       <article class="sched__card" data-reveal style="--reveal-delay: 80ms">
         <p class="sched__num"><span>Inference schedule</span><b>w̄ ↑ → think longer</b></p>
-        <h3 class="sched__title">Think <em>longer</em></h3>
+        <h3 class="sched__title">Think <span>longer</span></h3>
         <div class="sched__body">
           <p>The number of denoising steps scales with the uncertainty, at least one and at most a budget <i>I</i><sub>max</sub>. Because most control steps are near-deterministic, the budget is dominated by one-step generation.</p>
         </div>
@@ -236,7 +234,7 @@
       </article>
       <article class="sched__card" data-reveal style="--reveal-delay: 160ms">
         <p class="sched__num"><span>Execution schedule</span><b>w̄ ↑ → act cautiously</b></p>
-        <h3 class="sched__title">Act more <em>cautiously</em></h3>
+        <h3 class="sched__title">Act more <span>cautiously</span></h3>
         <div class="sched__body">
           <p>Fewer predicted actions are committed before re-planning when the moment is uncertain; when it is familiar, the policy executes a long chunk open-loop and moves fast.</p>
         </div>
@@ -244,16 +242,41 @@
       </article>
     </div>
 
-    <figure class="plate plate--compact" data-reveal>
+    <figure class="plate plate--live" id="live" data-reveal>
       <div class="plate__frame">
-        <picture>
-          <source srcset="assets/images/fig_uncertainty_curve.webp?v=2" type="image/webp" />
-          <img width="2415" height="953" src="assets/images/fig_uncertainty_curve.png?v=2" alt="Inferred uncertainty degree over normalized task progress on the real-robot Push-T task, for the upper and lower modes: two peaks at the branch point and the push point, near zero elsewhere." loading="lazy" decoding="async" />
-        </picture>
+        <div class="live" data-live data-src="assets/data/pusht_uncertainty.json?v=3">
+          <div class="live__video">
+            <div class="cmp__media cmp__media--43" data-controls>
+              <video data-live-video src="assets/videos/pusht/mode1.mp4?v=3" poster="assets/posters/pusht_mode1.jpg?v=3" muted loop playsinline preload="metadata" data-autoplay aria-label="AURA pushing the T into place, top-down camera"></video>
+              <span class="cmp__tag cmp__tag--ours">AURA · Push-T · Franka FR3</span>
+            </div>
+          </div>
+          <div class="live__panel">
+            <div class="live__chart-wrap">
+              <canvas class="live__chart" data-live-canvas role="img" aria-label="Inferred uncertainty against normalized task progress, drawn as the clip plays"></canvas>
+              <picture class="live__fallback" data-live-fallback>
+                <source srcset="assets/images/fig_uncertainty_curve.webp?v=3" type="image/webp" />
+                <img width="2415" height="953" src="assets/images/fig_uncertainty_curve.png?v=3" alt="Inferred uncertainty degree over normalized task progress on the real-robot Push-T task, for the upper and lower modes: two peaks at the branch point and the push point, near zero elsewhere." loading="lazy" decoding="async" />
+              </picture>
+            </div>
+            <dl class="live__readout" data-live-readout>
+              <div><dt>Progress</dt><dd data-live-progress>0 %</dd></div>
+              <div><dt><i class="live__swatch" aria-hidden="true"></i>w̄</dt><dd data-live-value>0.00</dd></div>
+              <div><dt>Phase</dt><dd data-live-phase data-live-idle="—">—</dd></div>
+            </dl>
+          </div>
+          <div class="live__foot">
+            <div class="mode-pick" role="group" aria-label="Choose Push-T mode">
+              <button type="button" class="mode-pick__btn is-active" aria-pressed="true" data-live-mode="upper" data-src="assets/videos/pusht/mode1.mp4?v=3" data-poster="assets/posters/pusht_mode1.jpg?v=3">Upper</button>
+              <button type="button" class="mode-pick__btn" aria-pressed="false" data-live-mode="lower" data-src="assets/videos/pusht/mode2.mp4?v=3" data-poster="assets/posters/pusht_mode2.jpg?v=3">Lower</button>
+            </div>
+            <p class="live__note" data-live-note></p>
+          </div>
+        </div>
       </div>
       <figcaption class="plate__meta">
-        <span class="plate__label">Fig. 7B · Adaptive w̄ on Push-T</span><span class="plate__rule"></span>
-        <p class="plate__caption">Evolution of the inferred uncertainty on the real-robot Push-T task, taken as the largest noise weight across action dimensions and averaged over 20 successful rollouts (10 per mode). AURA stays near-deterministic for most of the rollout and becomes stochastic only at two moments: the branching point and the final realignment. The two modes trace nearly identical profiles.</p>
+        <span class="plate__label">Fig. 7B · Adaptive w̄ on Push-T, live</span><span class="plate__rule"></span>
+        <p class="plate__caption">The inferred uncertainty on the real-robot Push-T task, taken as the largest noise weight across action dimensions and averaged over 20 successful rollouts (10 per mode; band ±s.d.). AURA stays near-deterministic for most of the rollout and becomes stochastic only at two moments, the branching point and the final realignment, and the two modes trace nearly identical profiles. The curve here is the paper's mean profile aligned to this clip's branch and push moments, not a live inference.</p>
       </figcaption>
     </figure>
   </div>
@@ -265,15 +288,15 @@
     <header class="sec-head" data-reveal>
       <p class="eyebrow eyebrow--accent">§ 01 · High learning efficiency</p>
       <span class="axis-rule"></span>
-      <h2 class="section-title">AURA learns with <em>striking efficiency</em></h2>
+      <h2 class="section-title">AURA learns faster</h2>
       <p class="section-lead">Anchoring the source on the recent action history places generation near its target rather than at a distant Gaussian, and injecting only as much noise as the local expert spread requires shrinks the space the policy must learn to map from. Both reduce the complexity of the source-to-action mapping, an advantage unavailable to policies that start from a fixed, unnecessarily broad prior.</p>
     </header>
 
     <figure class="plate" data-reveal>
       <div class="plate__frame">
         <picture>
-          <source srcset="assets/images/fig_learning.webp?v=2" type="image/webp" />
-          <img width="2386" height="2214" src="assets/images/fig_learning.png?v=2" alt="Learning-efficiency results: success versus training steps on RoboVerse against nine baselines, scaling on the π0.5 backbone with per-task Libero Object and Libero Goal bars, and a trajectory-variance analysis." loading="lazy" decoding="async" />
+          <source srcset="assets/images/fig_learning.webp?v=3" type="image/webp" />
+          <img width="2386" height="2214" src="assets/images/fig_learning.png?v=3" alt="Learning-efficiency results: success versus training steps on RoboVerse against nine baselines, scaling on the π0.5 backbone with per-task Libero Object and Libero Goal bars, and a trajectory-variance analysis." loading="lazy" decoding="async" />
         </picture>
       </div>
       <figcaption class="plate__meta">
@@ -305,30 +328,30 @@
         <div class="pair">
           <figure class="cmp__tile cmp__tile--ours">
             <div class="cmp__media" data-controls>
-              <video src="assets/videos/pickveg/carrot.mp4?v=2" poster="assets/posters/pickveg_carrot.jpg?v=2" muted loop playsinline preload="metadata" data-autoplay aria-label="AURA picking the carrot cleanly after limited training"></video>
+              <video src="assets/videos/pickveg/carrot.mp4?v=3" poster="assets/posters/pickveg_carrot.jpg?v=3" muted loop playsinline preload="metadata" data-autoplay aria-label="AURA picking the carrot cleanly after limited training"></video>
               <span class="cmp__tag cmp__tag--ours">AURA</span>
             </div>
             <figcaption class="cmp__cap">
-              <span class="cmp__label cmp__label--ours">Same limited budget</span>
+              <span class="cmp__label cmp__label--ours">AURA</span>
               <span class="cmp__note">Reaches the object along a direct, jitter-free path.</span>
             </figcaption>
           </figure>
           <figure class="cmp__tile">
             <div class="cmp__media" data-controls>
-              <video src="assets/videos/pickveg/fm_shake_a.mp4?v=2" poster="assets/posters/pickveg_fm_shake_a.jpg?v=2" muted loop playsinline preload="metadata" data-autoplay aria-label="An under-trained flow policy oscillating near the target"></video>
+              <video src="assets/videos/pickveg/fm_shake_a.mp4?v=3" poster="assets/posters/pickveg_fm_shake_a.jpg?v=3" muted loop playsinline preload="metadata" data-autoplay aria-label="An under-trained flow policy oscillating near the target"></video>
               <span class="cmp__tag">Flow policy</span>
             </div>
             <figcaption class="cmp__cap">
-              <span class="cmp__label">Same limited budget</span>
-              <span class="cmp__note">Wanders and oscillates near the target.</span>
+              <span class="cmp__label">Flow policy · fewer training epochs</span>
+              <span class="cmp__note">Wanders and oscillates near the target; see Fig. 1D for the matched-budget comparison.</span>
             </figcaption>
           </figure>
         </div>
         <figure class="plate plate--flush mt-7">
           <div class="plate__frame">
             <picture>
-              <source srcset="assets/images/overview_d.webp?v=2" type="image/webp" />
-              <img width="1198" height="529" src="assets/images/overview_d.png?v=2" alt="End-effector trajectories on a picking task, colored by task time: the flow policy wanders and oscillates near the target while AURA reaches the object along a direct path." loading="lazy" decoding="async" />
+              <source srcset="assets/images/overview_d.webp?v=3" type="image/webp" />
+              <img width="1198" height="529" src="assets/images/overview_d.png?v=3" alt="End-effector trajectories on a picking task, colored by task time: the flow policy wanders and oscillates near the target while AURA reaches the object along a direct path." loading="lazy" decoding="async" />
             </picture>
           </div>
           <figcaption class="plate__meta">
@@ -347,7 +370,7 @@
     <header class="sec-head" data-reveal>
       <p class="eyebrow eyebrow--accent">§ 02 · Stable multimodality</p>
       <span class="axis-rule"></span>
-      <h2 class="section-title">Multimodality <em>only when it matters</em></h2>
+      <h2 class="section-title">Multimodality <span class="t-soft">only when it matters</span></h2>
       <p class="section-lead">Multiple valid solutions to one problem. Unlike deterministic policies, AURA keeps its learning efficiency without giving them up: it stays decisive within each mode and turns stochastic only at the branching moment between them, sustaining multimodality far more stably than a fully noised flow policy, with a 65 % average gain on real-world tasks.</p>
     </header>
 
@@ -355,7 +378,7 @@
       <article class="task-card" data-mode-tile data-reveal>
         <div class="task-card__media">
           <div class="cmp__media" data-controls>
-            <video src="assets/videos/pickcup/rim1.mp4?v=2" poster="assets/posters/pickcup_rim1.jpg?v=2" muted loop playsinline preload="metadata" data-autoplay aria-label="AURA grasping a cup"></video>
+            <video src="assets/videos/pickcup/rim1.mp4?v=3" poster="assets/posters/pickcup_rim1.jpg?v=3" muted loop playsinline preload="metadata" data-autoplay aria-label="AURA grasping a cup"></video>
             <span class="cmp__tag cmp__tag--ours">AURA</span>
           </div>
         </div>
@@ -364,8 +387,8 @@
           <p class="task-card__desc">A coffee mug admits two equally valid grasps, <b>by the rim or by the handle</b>. AURA commits to either from the same start and branches only at the grasping moment.</p>
           <div class="task-card__foot">
             <div class="mode-pick" role="group" aria-label="Choose grasp mode">
-              <button type="button" class="mode-pick__btn is-active" aria-pressed="true" data-src="assets/videos/pickcup/rim1.mp4?v=2" data-poster="assets/posters/pickcup_rim1.jpg?v=2">Rim</button>
-              <button type="button" class="mode-pick__btn" aria-pressed="false" data-src="assets/videos/pickcup/handle2.mp4?v=2" data-poster="assets/posters/pickcup_handle2.jpg?v=2">Handle</button>
+              <button type="button" class="mode-pick__btn is-active" aria-pressed="true" data-src="assets/videos/pickcup/rim1.mp4?v=3" data-poster="assets/posters/pickcup_rim1.jpg?v=3">Rim</button>
+              <button type="button" class="mode-pick__btn" aria-pressed="false" data-src="assets/videos/pickcup/handle2.mp4?v=3" data-poster="assets/posters/pickcup_handle2.jpg?v=3">Handle</button>
             </div>
             <p class="task-card__stat">200 demos · 100 per mode · joint space</p>
           </div>
@@ -375,7 +398,7 @@
       <article class="task-card" data-mode-tile data-reveal style="--reveal-delay: 80ms">
         <div class="task-card__media">
           <div class="cmp__media" data-controls>
-            <video src="assets/videos/pickveg/carrot.mp4?v=2" poster="assets/posters/pickveg_carrot.jpg?v=2" muted loop playsinline preload="metadata" data-autoplay aria-label="AURA picking a vegetable"></video>
+            <video src="assets/videos/pickveg/carrot.mp4?v=3" poster="assets/posters/pickveg_carrot.jpg?v=3" muted loop playsinline preload="metadata" data-autoplay aria-label="AURA picking a vegetable"></video>
             <span class="cmp__tag cmp__tag--ours">AURA</span>
           </div>
         </div>
@@ -384,8 +407,8 @@
           <p class="task-card__desc">A carrot and a daikon sit on opposite sides of a mango; retrieving <b>either the carrot or the daikon</b> counts as success. The flow policy holds both modes only inside a narrow band of training budgets.</p>
           <div class="task-card__foot">
             <div class="mode-pick" role="group" aria-label="Choose target">
-              <button type="button" class="mode-pick__btn is-active" aria-pressed="true" data-src="assets/videos/pickveg/carrot.mp4?v=2" data-poster="assets/posters/pickveg_carrot.jpg?v=2">Carrot</button>
-              <button type="button" class="mode-pick__btn" aria-pressed="false" data-src="assets/videos/pickveg/daikon.mp4?v=2" data-poster="assets/posters/pickveg_daikon.jpg?v=2">Daikon</button>
+              <button type="button" class="mode-pick__btn is-active" aria-pressed="true" data-src="assets/videos/pickveg/carrot.mp4?v=3" data-poster="assets/posters/pickveg_carrot.jpg?v=3">Carrot</button>
+              <button type="button" class="mode-pick__btn" aria-pressed="false" data-src="assets/videos/pickveg/daikon.mp4?v=3" data-poster="assets/posters/pickveg_daikon.jpg?v=3">Daikon</button>
             </div>
             <p class="task-card__stat">200 demos · 100 per mode · joint space</p>
           </div>
@@ -395,17 +418,17 @@
       <article class="task-card" data-mode-tile data-reveal>
         <div class="task-card__media">
           <div class="cmp__media cmp__media--43" data-controls>
-            <video src="assets/videos/pusht/mode1.mp4?v=2" poster="assets/posters/pusht_mode1.jpg?v=2" muted loop playsinline preload="metadata" data-autoplay aria-label="AURA pushing a T-shaped block into its target"></video>
+            <video src="assets/videos/pusht/mode1.mp4?v=3" poster="assets/posters/pusht_mode1.jpg?v=3" muted loop playsinline preload="metadata" data-autoplay aria-label="AURA pushing a T-shaped block into its target"></video>
             <span class="cmp__tag cmp__tag--ours">AURA</span>
           </div>
         </div>
         <div class="task-card__body">
           <div class="task-card__head"><h3 class="task-card__name">Push-T</h3><span class="task-card__robot">Franka FR3</span></div>
-          <p class="task-card__desc">From a fixed initial pose the T can be pushed into place <b>from its upper or its lower edge</b>. Uncertainty peaks at the branch point and at the final realignment, and stays near zero elsewhere (Fig. 7B).</p>
+          <p class="task-card__desc">From a fixed initial pose the T can be pushed into place <b>from its upper or its lower edge</b>. Uncertainty peaks at the branch point and at the final realignment and stays near zero elsewhere; watch it drawn live in <a href="#live">How it works</a>.</p>
           <div class="task-card__foot">
             <div class="mode-pick" role="group" aria-label="Choose route">
-              <button type="button" class="mode-pick__btn is-active" aria-pressed="true" data-src="assets/videos/pusht/mode1.mp4?v=2" data-poster="assets/posters/pusht_mode1.jpg?v=2">Mode #1</button>
-              <button type="button" class="mode-pick__btn" aria-pressed="false" data-src="assets/videos/pusht/mode2.mp4?v=2" data-poster="assets/posters/pusht_mode2.jpg?v=2">Mode #2</button>
+              <button type="button" class="mode-pick__btn is-active" aria-pressed="true" data-src="assets/videos/pusht/mode1.mp4?v=3" data-poster="assets/posters/pusht_mode1.jpg?v=3">Upper</button>
+              <button type="button" class="mode-pick__btn" aria-pressed="false" data-src="assets/videos/pusht/mode2.mp4?v=3" data-poster="assets/posters/pusht_mode2.jpg?v=3">Lower</button>
             </div>
             <p class="task-card__stat">100 demos · 50 per mode · task space</p>
           </div>
@@ -415,7 +438,7 @@
       <article class="task-card" data-mode-tile data-reveal style="--reveal-delay: 80ms">
         <div class="task-card__media">
           <div class="cmp__media cmp__media--43" data-controls>
-            <video src="assets/videos/bypass/path1.mp4?v=2" poster="assets/posters/bypass_path1.jpg?v=2" muted loop playsinline preload="metadata" data-autoplay aria-label="AURA moving around two posts to a target pose"></video>
+            <video src="assets/videos/bypass/path1.mp4?v=3" poster="assets/posters/bypass_path1.jpg?v=3" muted loop playsinline preload="metadata" data-autoplay aria-label="AURA moving around two posts to a target pose"></video>
             <span class="cmp__tag cmp__tag--ours">AURA</span>
           </div>
         </div>
@@ -424,8 +447,8 @@
           <p class="task-card__desc">The arm must reach a common target pose while avoiding two posts, along one of two mirrored S-shaped paths. With only <b>60 demonstrations</b>, AURA still keeps both paths, while a fully noised policy's modes turn fragile outside a narrow training band.</p>
           <div class="task-card__foot">
             <div class="mode-pick" role="group" aria-label="Choose path">
-              <button type="button" class="mode-pick__btn is-active" aria-pressed="true" data-src="assets/videos/bypass/path1.mp4?v=2" data-poster="assets/posters/bypass_path1.jpg?v=2">Path #1</button>
-              <button type="button" class="mode-pick__btn" aria-pressed="false" data-src="assets/videos/bypass/path2.mp4?v=2" data-poster="assets/posters/bypass_path2.jpg?v=2">Path #2</button>
+              <button type="button" class="mode-pick__btn is-active" aria-pressed="true" data-src="assets/videos/bypass/path1.mp4?v=3" data-poster="assets/posters/bypass_path1.jpg?v=3">Path #1</button>
+              <button type="button" class="mode-pick__btn" aria-pressed="false" data-src="assets/videos/bypass/path2.mp4?v=3" data-poster="assets/posters/bypass_path2.jpg?v=3">Path #2</button>
             </div>
             <p class="task-card__stat">60 demos · 30 per mode · task space</p>
           </div>
@@ -434,7 +457,7 @@
     <article class="task-card task-card--wide" data-mode-tile data-reveal>
         <div class="task-card__media">
           <div class="cmp__media" data-controls>
-            <video src="assets/videos/blockpush/up.mp4?v=2" poster="assets/posters/blockpush_up.jpg?v=2" muted loop playsinline preload="metadata" data-autoplay aria-label="AURA pushing one of two blocks"></video>
+            <video src="assets/videos/blockpush/up.mp4?v=3" poster="assets/posters/blockpush_up.jpg?v=3" muted loop playsinline preload="metadata" data-autoplay aria-label="AURA pushing one of two blocks"></video>
             <span class="cmp__tag cmp__tag--ours">AURA</span>
           </div>
         </div>
@@ -443,8 +466,8 @@
           <p class="task-card__desc">From a shared initial pose the policy may push <b>either the orange block or the purple one</b>. Stochasticity concentrates in the few action dimensions along which the two modes actually diverge, and vanishes on the gripper.</p>
           <div class="task-card__foot">
             <div class="mode-pick" role="group" aria-label="Choose block">
-              <button type="button" class="mode-pick__btn is-active" aria-pressed="true" data-src="assets/videos/blockpush/up.mp4?v=2" data-poster="assets/posters/blockpush_up.jpg?v=2">Orange</button>
-              <button type="button" class="mode-pick__btn" aria-pressed="false" data-src="assets/videos/blockpush/down.mp4?v=2" data-poster="assets/posters/blockpush_down.jpg?v=2">Purple</button>
+              <button type="button" class="mode-pick__btn is-active" aria-pressed="true" data-src="assets/videos/blockpush/up.mp4?v=3" data-poster="assets/posters/blockpush_up.jpg?v=3">Orange</button>
+              <button type="button" class="mode-pick__btn" aria-pressed="false" data-src="assets/videos/blockpush/down.mp4?v=3" data-poster="assets/posters/blockpush_down.jpg?v=3">Purple</button>
             </div>
             <p class="task-card__stat">100 demos · 50 per mode · task space</p>
           </div>
@@ -476,8 +499,8 @@
     <figure class="plate" data-reveal>
       <div class="plate__frame">
         <picture>
-          <source srcset="assets/images/fig_multimodal_swap.webp?v=2" type="image/webp" />
-          <img width="2423" height="1541" src="assets/images/fig_multimodal_swap.png?v=2" alt="Pick Vegetable and Push-T, each with two modes, and heat-maps of multimodality over training steps and demonstration counts for the flow policy and AURA: AURA stays bright across the grid, the flow policy only in a narrow band." loading="lazy" decoding="async" />
+          <source srcset="assets/images/fig_multimodal_swap.webp?v=3" type="image/webp" />
+          <img width="2423" height="1541" src="assets/images/fig_multimodal_swap.png?v=3" alt="Pick Vegetable and Push-T, each with two modes, and heat-maps of multimodality over training steps and demonstration counts for the flow policy and AURA: AURA stays bright across the grid, the flow policy only in a narrow band." loading="lazy" decoding="async" />
         </picture>
       </div>
       <figcaption class="plate__meta">
@@ -489,8 +512,8 @@
     <figure class="plate" data-reveal>
       <div class="plate__frame">
         <picture>
-          <source srcset="assets/images/fig_multimodal_sim.webp?v=2" type="image/webp" />
-          <img width="2380" height="1914" src="assets/images/fig_multimodal_sim.png?v=2" alt="Seven multimodal tasks in simulation and on real robots, success and multimodality against training steps for the flow policy, A2A and AURA, and real-world success and multimodality bars." loading="lazy" decoding="async" />
+          <source srcset="assets/images/fig_multimodal_sim.webp?v=3" type="image/webp" />
+          <img width="2380" height="1914" src="assets/images/fig_multimodal_sim.png?v=3" alt="Seven multimodal tasks in simulation and on real robots, success and multimodality against training steps for the flow policy, A2A and AURA, and real-world success and multimodality bars." loading="lazy" decoding="async" />
         </picture>
       </div>
       <figcaption class="plate__meta">
@@ -507,7 +530,7 @@
     <header class="sec-head" data-reveal>
       <p class="eyebrow eyebrow--accent">§ 03 · Fast and smooth inference</p>
       <span class="axis-rule"></span>
-      <h2 class="section-title">A single step where nothing branches, <em>and smooth everywhere</em></h2>
+      <h2 class="section-title">One denoising step <span class="t-soft">where nothing branches</span></h2>
       <p class="section-lead">Because AURA adapts its number of denoising steps to context, it collapses generation to one step on near-deterministic phases, where conventional generative policies still spend ten to a hundred. Anchoring on the action history keeps successive chunks continuous at their boundaries, without any heuristic that stitches discontinuities.</p>
     </header>
 
@@ -515,7 +538,7 @@
       <div class="sync__panes">
         <figure class="sync__pane sync__pane--ours">
           <div class="cmp__media">
-            <video data-sync-video="a" src="assets/videos/fast/aura.mp4?v=2" poster="assets/posters/fast_aura.jpg?v=2" muted playsinline preload="metadata" aria-label="AURA completing the pick task"></video>
+            <video data-sync-video="a" src="assets/videos/fast/aura.mp4?v=3" poster="assets/posters/fast_aura.jpg?v=3" muted playsinline preload="metadata" aria-label="AURA completing the pick task"></video>
             <span class="cmp__tag cmp__tag--ours">AURA · Pick &amp; Place Peach</span>
           </div>
           <figcaption class="sync__cap">
@@ -525,7 +548,7 @@
         </figure>
         <figure class="sync__pane">
           <div class="cmp__media">
-            <video data-sync-video="b" src="assets/videos/fast/fm.mp4?v=2" poster="assets/posters/fast_fm.jpg?v=2" muted playsinline preload="metadata" aria-label="A flow policy completing the same pick task"></video>
+            <video data-sync-video="b" src="assets/videos/fast/fm.mp4?v=3" poster="assets/posters/fast_fm.jpg?v=3" muted playsinline preload="metadata" aria-label="A flow policy completing the same pick task"></video>
             <span class="cmp__tag">Flow policy · 10 steps · same task</span>
           </div>
           <figcaption class="sync__cap">
@@ -569,8 +592,8 @@
     <figure class="plate plate--compact" data-reveal>
       <div class="plate__frame">
         <picture>
-          <source srcset="assets/images/fig_inference.webp?v=2" type="image/webp" />
-          <img width="2352" height="2546" src="assets/images/fig_inference.png?v=2" alt="Inference performance: task-completion and total inference time for AURA, A2A and FM-DiT on Push Cube, Pick Glasses, Pick Cup and Block Push; effect of chunk size; scaling test on π0.5." loading="lazy" decoding="async" />
+          <source srcset="assets/images/fig_inference.webp?v=3" type="image/webp" />
+          <img width="2352" height="2546" src="assets/images/fig_inference.png?v=3" alt="Inference performance: task-completion and total inference time for AURA, A2A and FM-DiT on Push Cube, Pick Glasses, Pick Cup and Block Push; effect of chunk size; scaling test on π0.5." loading="lazy" decoding="async" />
         </picture>
       </div>
       <figcaption class="plate__meta">
@@ -587,12 +610,12 @@
     <header class="sec-head" data-reveal>
       <p class="eyebrow eyebrow--accent">§ 04 · Emergence of novel modes</p>
       <span class="axis-rule"></span>
-      <h2 class="section-title">Behaviors that never appear <em>in the demonstrations</em></h2>
+      <h2 class="section-title">Behaviors that never appear <span class="t-soft">in the demonstrations</span></h2>
       <p class="section-lead">No skill primitives, no scaling, no external planner. At the uncertain moments between sub-tasks AURA deliberately looks back less and stays exploratory, so it can freely stitch together pieces of motion learned in different demonstrations. The outcome is behavior never demonstrated: assembling a puzzle, tidying a table, or cooking in an order no expert ever showed.</p>
     </header>
 
     <div class="prose" data-reveal>
-      <p>We use the word <em>emergence</em> in a deliberately narrow sense. AURA acquires no new skill and solves no new task. It solves a known task in ways no expert demonstrated, recombining demonstrated segments at whatever granularity the inferred uncertainty rises, from whole sub-tasks down to fragments of a single action. Such emergence is therefore interpretable rather than opaque. With adaptive uncertainty, a policy can be made more flexible by drawing more fully on the diversity the data already contains, rather than by collecting more of it.</p>
+      <p>We use the word <b>emergence</b> in a deliberately narrow sense. AURA acquires no new skill and solves no new task. It solves a known task in ways no expert demonstrated, recombining demonstrated segments at whatever granularity the inferred uncertainty rises, from whole sub-tasks down to fragments of a single action. Such emergence is therefore interpretable rather than opaque. With adaptive uncertainty, a policy can be made more flexible by drawing more fully on the diversity the data already contains, rather than by collecting more of it.</p>
     </div>
 
     <!-- Jigsaw Puzzle -->
@@ -607,21 +630,21 @@
       <p class="toggle__desc">Four colored pieces must be moved from an initial layout to a target configuration, a long-horizon task whose sub-assemblies can be ordered in many valid ways. The 100 demonstrations contain only two orders. AURA reproduces both and composes two more at test time: one arises because the two demonstrated orders pass through a briefly identical observation after their second placement, so by shortening its history and re-sampling there AURA is not locked into the route it arrived on; in the other the puzzle is completed in three steps, because placing one piece incidentally carries a neighbouring one into position. <b>Neither baseline shows this capacity.</b> Clips at 2× speed.</p>
       <div class="toggle__panel cmp cmp--2" id="jigsaw-seen" role="tabpanel" data-panel="seen">
         <figure class="cmp__tile cmp__tile--ours">
-          <div class="cmp__media cmp__media--43" data-controls><video src="assets/videos/jigsaw/seen_1.mp4?v=2" poster="assets/posters/jigsaw_seen_1.jpg?v=2" muted loop playsinline preload="metadata" data-autoplay aria-label="Jigsaw puzzle, demonstrated order one"></video><span class="cmp__badge">2×</span></div>
+          <div class="cmp__media cmp__media--43" data-controls><video src="assets/videos/jigsaw/seen_1.mp4?v=3" poster="assets/posters/jigsaw_seen_1.jpg?v=3" muted loop playsinline preload="metadata" data-autoplay aria-label="Jigsaw puzzle, demonstrated order one"></video><span class="cmp__badge">2×</span></div>
           <figcaption class="cmp__cap"><span class="cmp__label cmp__label--ours">Mode #1 · demonstrated</span><span class="order"><i>White</i><i>Blue</i><i>Green</i><i>Purple</i></span></figcaption>
         </figure>
         <figure class="cmp__tile cmp__tile--ours">
-          <div class="cmp__media cmp__media--43" data-controls><video src="assets/videos/jigsaw/seen_2.mp4?v=2" poster="assets/posters/jigsaw_seen_2.jpg?v=2" muted loop playsinline preload="metadata" data-autoplay aria-label="Jigsaw puzzle, demonstrated order two"></video><span class="cmp__badge">2×</span></div>
+          <div class="cmp__media cmp__media--43" data-controls><video src="assets/videos/jigsaw/seen_2.mp4?v=3" poster="assets/posters/jigsaw_seen_2.jpg?v=3" muted loop playsinline preload="metadata" data-autoplay aria-label="Jigsaw puzzle, demonstrated order two"></video><span class="cmp__badge">2×</span></div>
           <figcaption class="cmp__cap"><span class="cmp__label cmp__label--ours">Mode #2 · demonstrated</span><span class="order"><i>Blue</i><i>White</i><i>Purple</i><i>Green</i></span></figcaption>
         </figure>
       </div>
       <div class="toggle__panel cmp cmp--2" id="jigsaw-emergent" role="tabpanel" data-panel="emergent" hidden>
         <figure class="cmp__tile cmp__tile--emergent">
-          <div class="cmp__media cmp__media--43" data-controls><video src="assets/videos/jigsaw/emergent_1.mp4?v=2" poster="assets/posters/jigsaw_emergent_1.jpg?v=2" muted loop playsinline preload="metadata" data-autoplay aria-label="Jigsaw puzzle, emergent order"></video><span class="cmp__badge">2×</span></div>
+          <div class="cmp__media cmp__media--43" data-controls><video src="assets/videos/jigsaw/emergent_1.mp4?v=3" poster="assets/posters/jigsaw_emergent_1.jpg?v=3" muted loop playsinline preload="metadata" data-autoplay aria-label="Jigsaw puzzle, emergent order"></video><span class="cmp__badge">2×</span></div>
           <figcaption class="cmp__cap"><span class="cmp__label cmp__label--emergent">Mode #3 · emergent</span><span class="cmp__note">A recombination of the two demonstrated orders at their shared intermediate state.</span></figcaption>
         </figure>
         <figure class="cmp__tile cmp__tile--emergent">
-          <div class="cmp__media cmp__media--43" data-controls><video src="assets/videos/jigsaw/emergent_2.mp4?v=2" poster="assets/posters/jigsaw_emergent_2.jpg?v=2" muted loop playsinline preload="metadata" data-autoplay aria-label="Jigsaw puzzle, emergent order completed in three moves"></video><span class="cmp__badge">2×</span></div>
+          <div class="cmp__media cmp__media--43" data-controls><video src="assets/videos/jigsaw/emergent_2.mp4?v=3" poster="assets/posters/jigsaw_emergent_2.jpg?v=3" muted loop playsinline preload="metadata" data-autoplay aria-label="Jigsaw puzzle, emergent order completed in three moves"></video><span class="cmp__badge">2×</span></div>
           <figcaption class="cmp__cap"><span class="cmp__label cmp__label--emergent">Mode #4 · emergent</span><span class="cmp__note">Completed in three placements: one move carries a neighbouring piece into position.</span></figcaption>
         </figure>
       </div>
@@ -644,25 +667,25 @@
       <p class="toggle__desc">A daikon, an ear of corn, a mango and a peach must be cleared into a basket, in any order. The 100 demonstrations cover exactly two orders, 50 each, designed so that after the first two objects the two modes yield similar robot states while requiring different subsequent orders. AURA succeeds in <b>14 of 20 rollouts and 9 of them follow three orders never demonstrated</b>, including one that moves to the front an item the demonstrations always placed in the second half. The flow policy fails on every rollout, at every checkpoint between 25 000 and 200 000 training steps. Clips at 6× speed.</p>
       <div class="toggle__panel cmp cmp--2" id="table-seen" role="tabpanel" data-panel="seen">
         <figure class="cmp__tile cmp__tile--ours">
-          <div class="cmp__media" data-controls><video src="assets/videos/table/seen_1234.mp4?v=2" poster="assets/posters/table_seen_1234.jpg?v=2" muted loop playsinline preload="metadata" data-autoplay aria-label="Table tidying, demonstrated order daikon, corn, mango, peach"></video><span class="cmp__badge">6×</span></div>
+          <div class="cmp__media" data-controls><video src="assets/videos/table/seen_1234.mp4?v=3" poster="assets/posters/table_seen_1234.jpg?v=3" muted loop playsinline preload="metadata" data-autoplay aria-label="Table tidying, demonstrated order daikon, corn, mango, peach"></video><span class="cmp__badge">6×</span></div>
           <figcaption class="cmp__cap"><span class="cmp__label cmp__label--ours">Mode #1 · demonstrated</span><span class="order"><i>Daikon</i><i>Corn</i><i>Mango</i><i>Peach</i></span></figcaption>
         </figure>
         <figure class="cmp__tile cmp__tile--ours">
-          <div class="cmp__media" data-controls><video src="assets/videos/table/seen_2143.mp4?v=2" poster="assets/posters/table_seen_2143.jpg?v=2" muted loop playsinline preload="metadata" data-autoplay aria-label="Table tidying, demonstrated order corn, daikon, peach, mango"></video><span class="cmp__badge">6×</span></div>
+          <div class="cmp__media" data-controls><video src="assets/videos/table/seen_2143.mp4?v=3" poster="assets/posters/table_seen_2143.jpg?v=3" muted loop playsinline preload="metadata" data-autoplay aria-label="Table tidying, demonstrated order corn, daikon, peach, mango"></video><span class="cmp__badge">6×</span></div>
           <figcaption class="cmp__cap"><span class="cmp__label cmp__label--ours">Mode #2 · demonstrated</span><span class="order"><i>Corn</i><i>Daikon</i><i>Peach</i><i>Mango</i></span></figcaption>
         </figure>
       </div>
       <div class="toggle__panel cmp cmp--3" id="table-emergent" role="tabpanel" data-panel="emergent" hidden>
         <figure class="cmp__tile cmp__tile--emergent">
-          <div class="cmp__media" data-controls><video src="assets/videos/table/emergent_1243.mp4?v=2" poster="assets/posters/table_emergent_1243.jpg?v=2" muted loop playsinline preload="metadata" data-autoplay aria-label="Table tidying, emergent order daikon, corn, peach, mango"></video><span class="cmp__badge">6×</span></div>
+          <div class="cmp__media" data-controls><video src="assets/videos/table/emergent_1243.mp4?v=3" poster="assets/posters/table_emergent_1243.jpg?v=3" muted loop playsinline preload="metadata" data-autoplay aria-label="Table tidying, emergent order daikon, corn, peach, mango"></video><span class="cmp__badge">6×</span></div>
           <figcaption class="cmp__cap"><span class="cmp__label cmp__label--emergent">Mode #3 · emergent</span><span class="order order--emergent"><i>Daikon</i><i>Corn</i><i>Peach</i><i>Mango</i></span></figcaption>
         </figure>
         <figure class="cmp__tile cmp__tile--emergent">
-          <div class="cmp__media" data-controls><video src="assets/videos/table/emergent_2134.mp4?v=2" poster="assets/posters/table_emergent_2134.jpg?v=2" muted loop playsinline preload="metadata" data-autoplay aria-label="Table tidying, emergent order corn, daikon, mango, peach"></video><span class="cmp__badge">6×</span></div>
+          <div class="cmp__media" data-controls><video src="assets/videos/table/emergent_2134.mp4?v=3" poster="assets/posters/table_emergent_2134.jpg?v=3" muted loop playsinline preload="metadata" data-autoplay aria-label="Table tidying, emergent order corn, daikon, mango, peach"></video><span class="cmp__badge">6×</span></div>
           <figcaption class="cmp__cap"><span class="cmp__label cmp__label--emergent">Mode #4 · emergent</span><span class="order order--emergent"><i>Corn</i><i>Daikon</i><i>Mango</i><i>Peach</i></span></figcaption>
         </figure>
         <figure class="cmp__tile cmp__tile--emergent">
-          <div class="cmp__media" data-controls><video src="assets/videos/table/emergent_3214.mp4?v=2" poster="assets/posters/table_emergent_3214.jpg?v=2" muted loop playsinline preload="metadata" data-autoplay aria-label="Table tidying, emergent order mango, corn, daikon, peach"></video><span class="cmp__badge">6×</span></div>
+          <div class="cmp__media" data-controls><video src="assets/videos/table/emergent_3214.mp4?v=3" poster="assets/posters/table_emergent_3214.jpg?v=3" muted loop playsinline preload="metadata" data-autoplay aria-label="Table tidying, emergent order mango, corn, daikon, peach"></video><span class="cmp__badge">6×</span></div>
           <figcaption class="cmp__cap"><span class="cmp__label cmp__label--emergent">Mode #5 · emergent</span><span class="order order--emergent"><i>Mango</i><i>Corn</i><i>Daikon</i><i>Peach</i></span></figcaption>
         </figure>
       </div>
@@ -685,25 +708,25 @@
       <p class="toggle__desc">Light the gas stove, place the pot on it, and add a bell pepper and a broccoli. The 53 demonstrations cover three orders. Over 50 test rollouts AURA succeeds in 12, of which <b>9 follow one of two orders that appear in no demonstration</b>: in one the vegetables are inserted between placing the pot and lighting the stove, in the other the stove is lit between the two vegetables, breaking both pairs at once. The flow policy succeeds in only 3 of 50 and every success replays a demonstrated order. Clips at 2× speed.</p>
       <div class="toggle__panel cmp cmp--3" id="cook-seen" role="tabpanel" data-panel="seen">
         <figure class="cmp__tile cmp__tile--ours">
-          <div class="cmp__media cmp__media--cook" data-controls><video src="assets/videos/cooking/seen_02.mp4?v=2" poster="assets/posters/cooking_seen_02.jpg?v=2" muted loop playsinline preload="metadata" data-autoplay aria-label="Cooking, demonstrated order pot, stove, pepper, broccoli"></video><span class="cmp__badge">2×</span></div>
+          <div class="cmp__media cmp__media--cook" data-controls><video src="assets/videos/cooking/seen_02.mp4?v=3" poster="assets/posters/cooking_seen_02.jpg?v=3" muted loop playsinline preload="metadata" data-autoplay aria-label="Cooking, demonstrated order pot, stove, pepper, broccoli"></video><span class="cmp__badge">2×</span></div>
           <figcaption class="cmp__cap"><span class="cmp__label cmp__label--ours">Order A · demonstrated</span><span class="order"><i>Pot</i><i>Stove</i><i>Pepper</i><i>Broccoli</i></span></figcaption>
         </figure>
         <figure class="cmp__tile cmp__tile--ours">
-          <div class="cmp__media cmp__media--cook" data-controls><video src="assets/videos/cooking/seen_01.mp4?v=2" poster="assets/posters/cooking_seen_01.jpg?v=2" muted loop playsinline preload="metadata" data-autoplay aria-label="Cooking, demonstrated order pepper, broccoli, pot, stove"></video><span class="cmp__badge">2×</span></div>
+          <div class="cmp__media cmp__media--cook" data-controls><video src="assets/videos/cooking/seen_01.mp4?v=3" poster="assets/posters/cooking_seen_01.jpg?v=3" muted loop playsinline preload="metadata" data-autoplay aria-label="Cooking, demonstrated order pepper, broccoli, pot, stove"></video><span class="cmp__badge">2×</span></div>
           <figcaption class="cmp__cap"><span class="cmp__label cmp__label--ours">Order B · demonstrated</span><span class="order"><i>Pepper</i><i>Broccoli</i><i>Pot</i><i>Stove</i></span></figcaption>
         </figure>
         <figure class="cmp__tile cmp__tile--ours">
-          <div class="cmp__media cmp__media--cook" data-controls><video src="assets/videos/cooking/seen_03.mp4?v=2" poster="assets/posters/cooking_seen_03.jpg?v=2" muted loop playsinline preload="metadata" data-autoplay aria-label="Cooking, demonstrated order stove, pot, pepper, broccoli"></video><span class="cmp__badge">2×</span></div>
+          <div class="cmp__media cmp__media--cook" data-controls><video src="assets/videos/cooking/seen_03.mp4?v=3" poster="assets/posters/cooking_seen_03.jpg?v=3" muted loop playsinline preload="metadata" data-autoplay aria-label="Cooking, demonstrated order stove, pot, pepper, broccoli"></video><span class="cmp__badge">2×</span></div>
           <figcaption class="cmp__cap"><span class="cmp__label cmp__label--ours">Order C · demonstrated</span><span class="order"><i>Stove</i><i>Pot</i><i>Pepper</i><i>Broccoli</i></span></figcaption>
         </figure>
       </div>
       <div class="toggle__panel cmp cmp--2" id="cook-emergent" role="tabpanel" data-panel="emergent" hidden>
         <figure class="cmp__tile cmp__tile--emergent">
-          <div class="cmp__media cmp__media--cook" data-controls><video src="assets/videos/cooking/emergent_01.mp4?v=2" poster="assets/posters/cooking_emergent_01.jpg?v=2" muted loop playsinline preload="metadata" data-autoplay aria-label="Cooking, emergent order pot, pepper, broccoli, stove"></video><span class="cmp__badge">2×</span></div>
+          <div class="cmp__media cmp__media--cook" data-controls><video src="assets/videos/cooking/emergent_01.mp4?v=3" poster="assets/posters/cooking_emergent_01.jpg?v=3" muted loop playsinline preload="metadata" data-autoplay aria-label="Cooking, emergent order pot, pepper, broccoli, stove"></video><span class="cmp__badge">2×</span></div>
           <figcaption class="cmp__cap"><span class="cmp__label cmp__label--emergent">Order D · emergent</span><span class="order order--emergent"><i>Pot</i><i>Pepper</i><i>Broccoli</i><i>Stove</i></span></figcaption>
         </figure>
         <figure class="cmp__tile cmp__tile--emergent">
-          <div class="cmp__media cmp__media--cook" data-controls><video src="assets/videos/cooking/emergent_05.mp4?v=2" poster="assets/posters/cooking_emergent_05.jpg?v=2" muted loop playsinline preload="metadata" data-autoplay aria-label="Cooking, emergent order pot, pepper, stove, broccoli"></video><span class="cmp__badge">2×</span></div>
+          <div class="cmp__media cmp__media--cook" data-controls><video src="assets/videos/cooking/emergent_05.mp4?v=3" poster="assets/posters/cooking_emergent_05.jpg?v=3" muted loop playsinline preload="metadata" data-autoplay aria-label="Cooking, emergent order pot, pepper, stove, broccoli"></video><span class="cmp__badge">2×</span></div>
           <figcaption class="cmp__cap"><span class="cmp__label cmp__label--emergent">Order E · emergent</span><span class="order order--emergent"><i>Pot</i><i>Pepper</i><i>Stove</i><i>Broccoli</i></span></figcaption>
         </figure>
       </div>
@@ -717,8 +740,8 @@
     <figure class="plate mt-9" data-reveal>
       <div class="plate__frame">
         <picture>
-          <source srcset="assets/images/fig_emergence.webp?v=2" type="image/webp" />
-          <img width="2392" height="2630" src="assets/images/fig_emergence.png?v=2" alt="Jigsaw Puzzle task, quantified success and mode counts for AURA, FM-DiT and A2A, the four resulting move sequences, and the five resulting Table Tidying orders." loading="lazy" decoding="async" />
+          <source srcset="assets/images/fig_emergence.webp?v=3" type="image/webp" />
+          <img width="2392" height="2630" src="assets/images/fig_emergence.png?v=3" alt="Jigsaw Puzzle task, quantified success and mode counts for AURA, FM-DiT and A2A, the four resulting move sequences, and the five resulting Table Tidying orders." loading="lazy" decoding="async" />
         </picture>
       </div>
       <figcaption class="plate__meta">
@@ -731,8 +754,8 @@
       <figure class="plate" data-reveal>
         <div class="plate__frame">
           <picture>
-            <source srcset="assets/images/appendix/appen_behavior_generation.webp?v=2" type="image/webp" />
-            <img width="2409" height="1117" src="assets/images/appendix/appen_behavior_generation.png?v=2" alt="Long 2D navigation task with four left and four right corridors: AURA composes many left-right pairings never paired in training, while A2A collapses to one route; the inferred noise widens at the two corridor-selection points." loading="lazy" decoding="async" />
+            <source srcset="assets/images/appendix/appen_behavior_generation.webp?v=3" type="image/webp" />
+            <img width="2409" height="1117" src="assets/images/appendix/appen_behavior_generation.png?v=3" alt="Long 2D navigation task with four left and four right corridors: AURA composes many left-right pairings never paired in training, while A2A collapses to one route; the inferred noise widens at the two corridor-selection points." loading="lazy" decoding="async" />
           </picture>
         </div>
         <figcaption class="plate__meta">
@@ -743,8 +766,8 @@
       <figure class="plate" data-reveal style="--reveal-delay: 100ms">
         <div class="plate__frame">
           <picture>
-            <source srcset="assets/images/fig_cooking.webp?v=2" type="image/webp" />
-            <img width="2326" height="2243" src="assets/images/fig_cooking.png?v=2" alt="Five execution orders of the simulated Cooking task, three demonstrated and two emergent, each shown as four frames." loading="lazy" decoding="async" />
+            <source srcset="assets/images/fig_cooking.webp?v=3" type="image/webp" />
+            <img width="2326" height="2243" src="assets/images/fig_cooking.png?v=3" alt="Five execution orders of the simulated Cooking task, three demonstrated and two emergent, each shown as four frames." loading="lazy" decoding="async" />
           </picture>
         </div>
         <figcaption class="plate__meta">
@@ -762,12 +785,12 @@
     <header class="sec-head" data-reveal>
       <p class="eyebrow eyebrow--accent">Platforms</p>
       <span class="axis-rule"></span>
-      <h2 class="section-title">Two real robots, <em>both control spaces</em></h2>
+      <h2 class="section-title">Two real robots, <span class="t-soft">both control spaces</span></h2>
       <p class="section-lead">Experiments span joint-space and task-space control under both absolute and incremental action modes, plus RoboVerse and Libero in simulation. The π<sub>0.5</sub> backbone serves only to show that the adaptive mechanism scales; every behavior-emergence result comes from lightweight visuomotor policies trained from scratch.</p>
     </header>
     <div class="robots">
       <article class="robot" data-reveal>
-        <div class="robot__photo"><img src="assets/posters/pickcup_handle2.jpg?v=2" alt="Galaxea R1 Lite grasping a cup" loading="lazy" decoding="async" /></div>
+        <div class="robot__photo"><img src="assets/posters/pickcup_handle2.jpg?v=3" alt="Galaxea R1 Lite grasping a cup" loading="lazy" decoding="async" /></div>
         <div class="robot__body">
           <h3 class="robot__name">Galaxea R1 Lite</h3>
           <p class="robot__tasks">Pick Cup · Pick Vegetable · Table Tidying · Pick&amp;Place Peach</p>
@@ -780,7 +803,7 @@
         </div>
       </article>
       <article class="robot" data-reveal style="--reveal-delay: 100ms">
-        <div class="robot__photo"><img src="assets/posters/pusht_mode1.jpg?v=2" alt="Franka FR3 pushing a T-shaped block" loading="lazy" decoding="async" /></div>
+        <div class="robot__photo"><img src="assets/posters/pusht_mode1.jpg?v=3" alt="Franka FR3 pushing a T-shaped block" loading="lazy" decoding="async" /></div>
         <div class="robot__body">
           <h3 class="robot__name">Franka Emika Research 3</h3>
           <p class="robot__tasks">Push-T · Block Push · Bypass · Jigsaw Puzzle</p>
@@ -822,7 +845,7 @@
   <div class="container">
     <div class="footer__row">
       <div class="footer__brand">
-        <img class="footer__logo" src="assets/logos/mars_lab.png?v=2" alt="MARS Lab logo" width="95" height="40" />
+        <img class="footer__logo" src="assets/logos/mars_lab.png?v=3" alt="MARS Lab logo" width="95" height="40" />
         <div class="footer__lab">MARS Lab<small>Nanyang Technological University</small></div>
       </div>
       <nav class="footer__links" aria-label="Footer">
@@ -837,15 +860,17 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
-<script src="scripts/reveal.js?v=2" defer></script>
-<script src="scripts/lazy-video.js?v=2" defer></script>
-<script src="scripts/comparison.js?v=2" defer></script>
-<script src="scripts/mode-select.js?v=2" defer></script>
-<script src="scripts/panel-toggle.js?v=2" defer></script>
-<script src="scripts/sync-compare.js?v=2" defer></script>
-<script src="scripts/section-spy.js?v=2" defer></script>
-<script src="scripts/scroll-progress.js?v=2" defer></script>
-<script src="scripts/copy-bibtex.js?v=2" defer></script>
-<script src="scripts/main.js?v=2" defer></script>
+<script src="scripts/reveal.js?v=3" defer></script>
+<script src="scripts/lazy-video.js?v=3" defer></script>
+<script src="scripts/comparison.js?v=3" defer></script>
+<script src="scripts/mode-select.js?v=3" defer></script>
+<script src="scripts/uncertainty-live.js?v=3" defer></script>
+<script src="scripts/hero-showcase.js?v=3" defer></script>
+<script src="scripts/panel-toggle.js?v=3" defer></script>
+<script src="scripts/sync-compare.js?v=3" defer></script>
+<script src="scripts/section-spy.js?v=3" defer></script>
+<script src="scripts/scroll-progress.js?v=3" defer></script>
+<script src="scripts/copy-bibtex.js?v=3" defer></script>
+<script src="scripts/main.js?v=3" defer></script>
 </body>
 </html>

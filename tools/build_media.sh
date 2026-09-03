@@ -308,23 +308,4 @@ if group_enabled cooking; then
   poster "$DST/cooking/emergent_05.mp4" "$POST/cooking_emergent_05.jpg"
 fi
 
-# =============================================================================
-# strip: short (<=8s) 360p loops for a UI filmstrip, one per headline feature.
-# =============================================================================
-if group_enabled strip; then
-  echo "== strip =="
-  SS=$PICKRED_MOTION_SS T=8 run "$SRC/multimodal feature/pick vegetable/pick red.mp4" \
-    "$DST/strip/01_learning.mp4" "$(tonemap_vf -2:360)" -crf 26 -g 48
-  T=8 run "$SRC/multimodal feature/pick cup/handle2.mp4" \
-    "$DST/strip/02_multimodal.mp4" "$(tonemap_vf -2:360)" -crf 26 -g 48
-  SS=$FAST_AURA_SS T=8 run "$SRC/fast and smother/our.mp4" \
-    "$DST/strip/03_fast.mp4" "scale=-2:360" -crf 26 -g 48
-  T=8 run "$SRC/emergent feature/table/emergent/2134.mp4" \
-    "$DST/strip/04_emergent.mp4" "setpts=PTS/6,fps=30,scale=-2:360,${TONEMAP_TAIL}" -crf 26 -g 48
-  poster "$DST/strip/01_learning.mp4"   "$POST/strip_01_learning.jpg"
-  poster "$DST/strip/02_multimodal.mp4" "$POST/strip_02_multimodal.jpg"
-  poster "$DST/strip/03_fast.mp4"       "$POST/strip_03_fast.jpg" 0
-  poster "$DST/strip/04_emergent.mp4"   "$POST/strip_04_emergent.jpg"
-fi
-
 echo "done."
