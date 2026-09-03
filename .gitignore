@@ -1,0 +1,12 @@
+.DS_Store
+**/.DS_Store
+.claude/
+.playwright-mcp/
+_src/
+tools/.venv/
+__pycache__/
+*.pyc
+*.disabled
+.vscode/
+.idea/
+Thumbs.db
