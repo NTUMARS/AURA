@@ -145,8 +145,10 @@
   color: var(--text-muted);
   margin-bottom: var(--s-5);
   display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
-  gap: 12px;
+  gap: 8px 12px;
 }
 .hero__method b { color: var(--text-display); font-weight: 600; }
 .hero__method i {
