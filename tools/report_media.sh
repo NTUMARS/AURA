@@ -58,7 +58,6 @@ except Exception:
   total_bytes=$(( total_bytes + ${size:-0} ))
   count=$((count + 1))
 
-  size_mb_int=$(python3 -c "print(int(${size:-0}/1024/1024))")
   if (( ${size:-0} > MAX_FILE_MB * 1024 * 1024 )); then
     echo "  !! exceeds per-file limit of ${MAX_FILE_MB} MB (${size_mb} MB)"
     status=1

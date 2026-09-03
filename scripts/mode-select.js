@@ -27,7 +27,11 @@
       if (order && btn.dataset.order !== undefined) {
         order.innerHTML = btn.dataset.order.split(',').map((s) => `<i>${s.trim()}</i>`).join('');
       }
-      if (!isStatic && !reduce) video.play().catch(() => {});
+      if (!isStatic && !reduce) {
+        video.addEventListener('canplay', () => {
+          if (window.AURA_lazyVideo) window.AURA_lazyVideo.play(video); else video.play().catch(() => {});
+        }, { once: true });
+      }
     };
 
     btns.forEach((btn) => {

@@ -29,10 +29,14 @@
   });
   const countIO = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
       const node = entry.target;
       const target = parseFloat(node.dataset.countTo);
       const decimals = parseInt(node.dataset.countDecimals || '0', 10);
+      if (!entry.isIntersecting) {
+        // already scrolled past (e.g. a nav jump): show the final value at once
+        if (entry.boundingClientRect.bottom < 0) { node.textContent = target.toFixed(decimals); countIO.unobserve(node); }
+        return;
+      }
       const duration = 1400;
       const start = performance.now();
       function tick(now) {
@@ -45,6 +49,25 @@
       requestAnimationFrame(tick);
       countIO.unobserve(node);
     });
-  }, { threshold: 0.4 });
+  }, { threshold: [0, 0.4] });
   countNodes.forEach((n) => countIO.observe(n));
+
+  // Fallback for hash jumps and instant scrolls that never let the tiles intersect:
+  // anything already above the viewport shows its final value.
+  const pending = new Set(countNodes);
+  let raf = 0;
+  function sweep() {
+    raf = 0;
+    pending.forEach((node) => {
+      if (node.getBoundingClientRect().bottom < 0) {
+        const decimals = parseInt(node.dataset.countDecimals || '0', 10);
+        node.textContent = parseFloat(node.dataset.countTo).toFixed(decimals);
+        pending.delete(node);
+        countIO.unobserve(node);
+      }
+    });
+  }
+  const onScroll = () => { if (!raf && pending.size) raf = requestAnimationFrame(sweep); };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('load', () => setTimeout(sweep, 300));
 })();

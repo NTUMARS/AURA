@@ -33,6 +33,7 @@ FAST_FM2_MOTION_START=6     # FM2.mp4
 FAST_AURA_SS=22.5
 FAST_FM_SS=6.5
 FAST_FM2_SS=5.5
+FAST_FM_T=20       # cut before a person enters the frame to reset the scene (~20.5 s out)
 
 # "pick vegetable/pick red.mp4": arm starts reaching at ~4s (zoom_pickred_1to8.jpg).
 # Only used for the strip/01_learning.mp4 loop -- the full pickveg/carrot.mp4
@@ -155,11 +156,9 @@ poster() {
 if group_enabled fast; then
   echo "== fast =="
   SS=$FAST_AURA_SS run "$SRC/fast and smother/our.mp4" "$DST/fast/aura.mp4" "scale=-2:720" -crf 22 -g 30
-  SS=$FAST_FM_SS   run "$SRC/fast and smother/FM.mp4"  "$DST/fast/fm.mp4"   "scale=-2:720" -crf 22 -g 30
-  SS=$FAST_FM2_SS  run "$SRC/fast and smother/FM2.mp4" "$DST/fast/fm2.mp4"  "scale=-2:720" -crf 22 -g 30
+  SS=$FAST_FM_SS T=$FAST_FM_T run "$SRC/fast and smother/FM.mp4"  "$DST/fast/fm.mp4"   "scale=-2:720" -crf 22 -g 30
   poster "$DST/fast/aura.mp4" "$POST/fast_aura.jpg" 0
   poster "$DST/fast/fm.mp4"   "$POST/fast_fm.jpg"   0
-  poster "$DST/fast/fm2.mp4"  "$POST/fast_fm2.jpg"  0
 fi
 
 # =============================================================================
