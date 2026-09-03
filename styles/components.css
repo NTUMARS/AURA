@@ -1216,6 +1216,6 @@
 }
 
 /* cooking clips are ~1024×884 after the banner crop */
-.cmp__media--cook { aspect-ratio: 1024 / 884; }
+.cmp__media--cook { aspect-ratio: 1024 / 831; }
 .stats--2 { grid-template-columns: repeat(2, 1fr); }
 @media (max-width: 520px) { .stats--2 { grid-template-columns: 1fr; } }
