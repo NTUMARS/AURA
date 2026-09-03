@@ -204,8 +204,10 @@ fi
 # =============================================================================
 if group_enabled pusht; then
   echo "== pusht =="
-  run "$SRC/multimodal feature/push T/wrist_cam.mp4"     "$DST/pusht/mode1.mp4" "" -crf 21 -g 30
-  run "$SRC/multimodal feature/push T/wrist_cam (1).mp4" "$DST/pusht/mode2.mp4" "" -crf 21 -g 30
+  # SS=0.2: frame 0 of both source clips shows a human hand resetting the
+  # scene; seek 0.2s in to start on the actual rollout.
+  SS=0.2 run "$SRC/multimodal feature/push T/wrist_cam.mp4"     "$DST/pusht/mode1.mp4" "" -crf 21 -g 30
+  SS=0.2 run "$SRC/multimodal feature/push T/wrist_cam (1).mp4" "$DST/pusht/mode2.mp4" "" -crf 21 -g 30
   poster "$DST/pusht/mode1.mp4" "$POST/pusht_mode1.jpg"
   poster "$DST/pusht/mode2.mp4" "$POST/pusht_mode2.jpg"
 fi

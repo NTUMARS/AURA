@@ -140,6 +140,23 @@ def build_grey_col_mask(width):
     return mask
 
 
+def available_row_bounds(exclude_mask, col_min, col_max, row_min, row_max):
+    """Per column, the [first, last] row in [row_min, row_max] NOT covered by
+    an exclude box -- i.e. what we could possibly have observed there. Equals
+    (row_min, row_max) for a column with no exclusion at all."""
+    n = col_max - col_min + 1
+    avail_min = np.full(n, row_min)
+    avail_max = np.full(n, row_max)
+    for i, col in enumerate(range(col_min, col_max + 1)):
+        colex = exclude_mask[row_min:row_max + 1, col]
+        if colex.any():
+            visible = np.flatnonzero(~colex)
+            if visible.size:
+                avail_min[i] = row_min + visible[0]
+                avail_max[i] = row_min + visible[-1]
+    return avail_min, avail_max
+
+
 def color_mask(arr, color, tol):
     diff = arr.astype(np.int32) - np.array(color, dtype=np.int32)
     dist = np.sqrt((diff ** 2).sum(axis=-1))
@@ -363,6 +380,7 @@ def main():
     arr = np.array(img)
     exclude_mask = build_exclude_mask(arr.shape[:2])
     grey_col = build_grey_col_mask(arr.shape[1])
+    avail_min, avail_max = available_row_bounds(exclude_mask, COL_MIN, COL_MAX, ROW_MIN, ROW_MAX)
 
     x_grid = np.linspace(0.0, 1.0, args.n)
     x_cols = col_to_x(np.arange(COL_MIN, COL_MAX + 1))
@@ -387,12 +405,29 @@ def main():
         white_mask = color_mask(arr, spec["band_white"], BAND_TOL)
         grey_mask = color_mask(arr, spec["band_grey"], BAND_TOL)
         overlap_mask = color_mask(arr, spec["band_overlap"], BAND_TOL)
-        # band_white only applies outside the grey rectangles (else it also
-        # catches bare grey background); band_grey only inside them.
-        band_mask = overlap_mask | (grey_mask & grey_col) | (white_mask & ~grey_col)
+        # band_white/band_overlap are both "over white" tints (per the source
+        # notes) and only apply outside the grey rectangles -- inside them,
+        # band_white would also catch bare grey background (dist(#E2F1F0,
+        # #EBEDEF)~=9.9 < 18) and band_overlap is within tolerance of the
+        # *other* mode's own band_grey (e.g. dist(#CDE1EA,#CCD8E3)~=11.4),
+        # so applying either there mixes in area that isn't this mode's band.
+        # There's no separate "overlap-over-grey" tint given because, over
+        # grey, the overlap area renders as whichever mode draws on top
+        # (empirically Lower) -- already covered by *that* mode's band_grey.
+        band_mask = (grey_mask & grey_col) | ((white_mask | overlap_mask) & ~grey_col)
         band_mask = (band_mask | any_line_mask) & ~exclude_mask
 
         hi_row, lo_row = extract_band_rows(band_mask, mean_row, COL_MIN, COL_MAX, ROW_MIN, ROW_MAX)
+
+        # A run that stops exactly at an exclude box's edge is truncated, not
+        # a true band boundary (e.g. the robot insets cut into the scan's top
+        # rows) -- treat it as absent so the fallback below estimates it
+        # instead of reporting the exclude box's edge as the band's true
+        # extent.
+        top_truncated = (avail_min > ROW_MIN) & (hi_row <= avail_min + 1)
+        bot_truncated = (avail_max < ROW_MAX) & (lo_row >= avail_max - 1)
+        hi_row = np.where(top_truncated, np.nan, hi_row)
+        lo_row = np.where(bot_truncated, np.nan, lo_row)
 
         # Fallback: where the band run is absent, use mean +/- the local
         # median half-width (computed from columns where it *was* found).
