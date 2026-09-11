@@ -8,7 +8,7 @@
 }
 
 .container--wide { max-width: 1440px; }
-.container--narrow { max-width: 880px; }
+.container--narrow { max-width: 940px; }
 
 .section {
   padding-block: var(--section-gap);
@@ -45,9 +45,9 @@
 
 .section-title {
   font-family: var(--display);
-  font-weight: 400;
+  font-weight: 600;
   font-size: var(--section-h);
-  line-height: 1.12;
+  line-height: 1.08;
   letter-spacing: var(--tracking-tight);
   color: var(--text-display);
   margin-bottom: var(--s-5);
@@ -56,8 +56,8 @@
 
 .section-title em {
   font-style: normal;
-  font-weight: 400;
-  color: var(--text-soft);
+  font-weight: 500;
+  color: var(--text-muted);
 }
 
 .section-lead {
@@ -66,7 +66,7 @@
   font-weight: 400;
   color: var(--text-soft);
   line-height: 1.5;
-  max-width: 62ch;
+  max-width: 58ch;
   margin-bottom: var(--s-8);
 }
 
@@ -76,10 +76,11 @@
   font-size: var(--text-base);
   line-height: var(--leading-normal);
   color: var(--text);
-  max-width: 68ch;
+  max-width: 66ch;
 }
 .prose p + p { margin-top: var(--s-4); }
 .prose strong { font-weight: 600; color: var(--text-display); }
+.prose i { font-style: normal; font-family: var(--mono); font-size: 0.92em; color: var(--text-display); }   /* math variables: upright mono, no italics */
 
 .grid-2 {
   display: grid;

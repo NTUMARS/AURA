@@ -1,7 +1,7 @@
 {
   "images/overview": {"w": 2407, "h": 2125, "png": 3150576, "webp": 404764},
   "images/framework": {"w": 2417, "h": 2866, "png": 1283196, "webp": 228538},
-  "images/fig_learning": {"w": 2386, "h": 2214, "png": 1443508, "webp": 205078},
+  "images/fig_learning": {"w": 2353, "h": 2160, "png": 771764, "webp": 205200},
   "images/fig_multimodal_swap": {"w": 2423, "h": 1541, "png": 1458152, "webp": 205154},
   "images/fig_multimodal_sim": {"w": 2380, "h": 1914, "png": 1203280, "webp": 209754},
   "images/fig_inference": {"w": 2352, "h": 2546, "png": 900415, "webp": 193354},

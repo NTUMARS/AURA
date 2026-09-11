@@ -5,19 +5,19 @@
 <title>og-card</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500;600&display=block" />
 <style>
   * { margin: 0; box-sizing: border-box; }
-  body { width: 1200px; height: 630px; background: #F7F5F0; overflow: hidden; position: relative; font-family: "Newsreader", Georgia, serif; color: #15171A; }
-  .frame { position: absolute; inset: 28px; border: 1px solid #CFCAC0; border-radius: 18px; }
+  body { width: 1200px; height: 630px; background: #FFFFFF; overflow: hidden; position: relative; font-family: "Geist", "Inter", system-ui, sans-serif; color: #0B0D10; -webkit-font-smoothing: antialiased; }
+  .frame { position: absolute; inset: 28px; border: 1px solid #E6E9EE; border-radius: 20px; }
   .inner { position: absolute; inset: 0; padding: 84px 92px 76px; display: flex; flex-direction: column; justify-content: space-between; }
-  .eyebrow { font-family: "JetBrains Mono", monospace; font-size: 17px; letter-spacing: .2em; text-transform: uppercase; color: #6E747B; display: flex; align-items: center; gap: 16px; }
-  .eyebrow b { color: #15171A; font-weight: 500; }
-  .axis { display: inline-block; width: 46px; height: 3px; border-radius: 3px; background: linear-gradient(90deg, #B23A2A 0%, #D9A59B 38%, #B9D3D6 62%, #2A7F8A 100%); }
-  h1 { font-size: 76px; font-weight: 500; line-height: 1.02; letter-spacing: -0.02em; font-variation-settings: "opsz" 72; max-width: 19ch; }
-  .tag { font-size: 30px; font-style: italic; font-weight: 400; color: #3F444A; font-variation-settings: "opsz" 40; margin-top: 22px; }
-  .foot { display: flex; justify-content: space-between; align-items: center; font-family: "JetBrains Mono", monospace; font-size: 15px; letter-spacing: .1em; text-transform: uppercase; color: #6E747B; white-space: nowrap; }
-  .foot b { color: #15171A; font-weight: 500; }
+  .eyebrow { font-family: "JetBrains Mono", monospace; font-size: 17px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: #667080; display: flex; align-items: center; gap: 16px; }
+  .eyebrow b { color: #B23A2A; font-weight: 600; }
+  .axis { display: inline-block; width: 46px; height: 3px; border-radius: 3px; background: linear-gradient(90deg, #B23A2A 0%, #D3D8DF 50%, #2A7F8A 100%); }
+  h1 { font-size: 78px; font-weight: 600; line-height: 1.0; letter-spacing: -0.03em; max-width: 18ch; }
+  .tag { font-family: "Inter", system-ui, sans-serif; font-size: 27px; font-weight: 400; color: #3B424B; margin-top: 26px; letter-spacing: -0.005em; }
+  .foot { display: flex; justify-content: space-between; align-items: center; font-family: "JetBrains Mono", monospace; font-size: 15px; letter-spacing: .1em; text-transform: uppercase; color: #667080; }
+  .foot b { color: #0B0D10; font-weight: 600; }
   .stats { display: flex; gap: 40px; }
   .stats span::before { content: ""; display: inline-block; width: 22px; height: 2px; background: #B23A2A; vertical-align: middle; margin-right: 10px; border-radius: 2px; }
   .stats span:last-child::before { background: #2A7F8A; }

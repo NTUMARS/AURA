@@ -46,6 +46,14 @@ class P(HTMLParser):
             if key in a: self.refs.append(('id', key, '#' + a[key]))
         for key in ('data-src', 'data-poster', 'data-clip'):
             if key in a: self.refs.append((tag, key, a[key]))
+        if 'data-pool' in a:   # hero mosaic: JSON list of {clip, poster, href, ...}
+            try:
+                for e in json.loads(a['data-pool']):
+                    for key in ('clip', 'poster'):
+                        if e.get(key): self.refs.append((tag, 'data-pool.' + key, e[key]))
+                    if e.get('href'): self.refs.append(('id', 'data-pool.href', e['href']))
+            except ValueError as ex:
+                self.refs.append((tag, 'data-pool', f'INVALID-JSON:{ex}'))
     def handle_endtag(self, tag):
         while self.stack and self.stack[-1][0] != tag: self.stack.pop()
         if self.stack: self.stack.pop()

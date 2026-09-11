@@ -12,7 +12,7 @@ body {
   font-synthesis: none;
   background: var(--bg);
   color: var(--text);
-  font-family: var(--serif-body);
+  font-family: var(--sans);
   font-size: var(--text-base);
   font-weight: 500;
   line-height: var(--leading-normal);

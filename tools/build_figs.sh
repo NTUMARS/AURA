@@ -177,11 +177,20 @@ FIGURES=(
   "appen_spread|appendix/appen_spread"
 )
 
+# Figures the paper embeds as PNG rather than PDF (\includegraphics{Figs/<stem>.png});
+# their PDFs in _src/figs are stale, so the PNG is the source of truth for these.
+PNG_SOURCES=("learning_faster")
+
 for entry in "${FIGURES[@]}"; do
   stem="${entry%%|*}"
   out="${entry##*|}"
   pdf="$SRC/figs/${stem}.pdf"
-  [[ -f "$pdf" ]] || { echo "ERROR: missing source PDF: $pdf" >&2; exit 1; }
+  src_png="$SRC/figs/${stem}.png"
+  use_png=0
+  for ps in "${PNG_SOURCES[@]}"; do [[ "$ps" == "$stem" && -f "$src_png" ]] && use_png=1; done
+  if (( ! use_png )); then
+    [[ -f "$pdf" ]] || { echo "ERROR: missing source PDF: $pdf" >&2; exit 1; }
+  fi
 
   final_png="$IMG/${out}.png"
   final_webp="$IMG/${out}.webp"
@@ -189,9 +198,14 @@ for entry in "${FIGURES[@]}"; do
   raw="$TMP/${stem}.png"
 
   if need_build "$final_png" "$final_webp"; then
-    # rasterise the PDF (not the PNG -- the PNGs carry soft alpha); no
-    # -transp, so pdftocairo flattens onto white by default
-    pdftocairo -png -singlefile -scale-to-x 2400 -scale-to-y -1 "$pdf" "$raw_prefix"
+    if (( use_png )); then
+      # the paper's own PNG export (may carry soft alpha): flatten onto white
+      python3 "$SCRIPT_DIR/flatten_on_white.py" "$src_png" "$raw"
+    else
+      # rasterise the PDF (not the PNG -- the PNGs carry soft alpha); no
+      # -transp, so pdftocairo flattens onto white by default
+      pdftocairo -png -singlefile -scale-to-x 2400 -scale-to-y -1 "$pdf" "$raw_prefix"
+    fi
   fi
   finish_png "$raw" "$final_png" "$final_webp" "images/${out}"
 done

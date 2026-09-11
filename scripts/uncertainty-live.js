@@ -31,10 +31,12 @@
     let dpr = 1, W = 0, H = 0, L = null, theme = null, staticLayer = null;
     let lastP = -1, rafId = 0;
     let progressive = !isStatic && !reduce;
+    // seconds of clip time the drawn curve runs ahead of the video (data-lead="0" disables)
+    const lead = Math.max(0, parseFloat(block.dataset.lead ?? '0.4') || 0);
 
     const inst = {
       block, video,
-      get p() { return lastP; }, get mode() { return mode; }, get complete() { return lastP >= 1; },
+      get p() { return lastP; }, get mode() { return mode; }, get complete() { return lastP >= 1; }, lead,
       setMode: (k) => setMode(k), render: () => render(),
     };
     instances.push(inst);
@@ -70,7 +72,7 @@
     const progressOf = (t) => {
       const d = video.duration;
       if (!isFinite(d) || d <= 0) return 0;
-      return clamp(warp(clamp(t / d, 0, 1)), 0, 1);
+      return clamp(warp(clamp((t + lead) / d, 0, 1)), 0, 1);   // lead applied in clip time, before the alignment warp
     };
 
     const sample = (arr, p) => {
@@ -103,7 +105,7 @@
       W = Math.max(1, Math.round(r.width)); H = Math.max(1, Math.round(r.height));
       canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.font = `500 11px ${theme.mono}`;
+      ctx.font = `500 12.5px ${theme.mono}`;
       const tw = ctx.measureText('0.4').width;
       L = { x0: Math.ceil(tw) + 14, x1: W - 10, y0: 30, y1: H - 34 };
       staticLayer = null; lastP = -1;
@@ -135,7 +137,7 @@
       c.strokeStyle = theme.borderStrong;
       c.beginPath(); c.moveTo(hair(L.x0), L.y0); c.lineTo(hair(L.x0), hair(L.y1)); c.lineTo(L.x1, hair(L.y1)); c.stroke();
       // ticks + labels
-      c.fillStyle = theme.muted; c.font = `500 11px ${theme.mono}`; c.textBaseline = 'top'; c.textAlign = 'center';
+      c.fillStyle = theme.muted; c.font = `500 12.5px ${theme.mono}`; c.textBaseline = 'top'; c.textAlign = 'center';
       (data.x.ticks || []).forEach((t) => {
         const x = hair(xOf(t));
         c.beginPath(); c.moveTo(x, L.y1); c.lineTo(x, L.y1 + 4); c.stroke();
@@ -144,7 +146,7 @@
       c.textAlign = 'right'; c.textBaseline = 'middle';
       (data.y.ticks || []).forEach((t) => c.fillText(t.toFixed(1), L.x0 - 8, yOf(t)));
       // axis titles
-      c.font = `500 10px ${theme.mono}`; c.textAlign = 'center'; c.textBaseline = 'alphabetic';
+      c.font = `500 11.5px ${theme.mono}`; c.textAlign = 'center'; c.textBaseline = 'alphabetic';
       c.fillText(spaced((data.x.label || 'PROGRESS').toUpperCase()), (L.x0 + L.x1) / 2, H - 6);
       c.textAlign = 'left';
       c.fillText(spaced('UNCERTAINTY DEGREE'), L.x0, 12);
@@ -180,7 +182,7 @@
       ctx.stroke();
     };
     const drawPhaseLabels = (p) => {
-      ctx.font = `500 10px ${theme.mono}`; ctx.textAlign = 'center'; ctx.textBaseline = 'top'; ctx.fillStyle = theme.ink;
+      ctx.font = `500 11.5px ${theme.mono}`; ctx.textAlign = 'center'; ctx.textBaseline = 'top'; ctx.fillStyle = theme.ink;
       (data.phases || []).forEach((ph) => {
         const a = progressive ? clamp((p - ph.range[0]) / 0.02, 0, 1) : 1;
         if (a <= 0) return;

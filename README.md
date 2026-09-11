@@ -8,9 +8,9 @@ Live: https://jingliangli.com/AURA/ (GitHub Pages, `main` / root, custom domain 
 
 ```
 index.html                 single page; <html data-asset-v="N" class="no-js">
-styles/                    tokens · reset · layout · components  ("journal plate", Swiss white)
+styles/                    tokens · reset · layout · components  ("journal plate", pure white; Geist display · Inter body · JetBrains Mono labels)
 scripts/                   reveal · lazy-video · comparison (tile control bar) · mode-select (chips)
-                           hero-showcase (crossfading real-robot reel) · uncertainty-live (curve drawn in sync with the Push-T clip)
+                           hero-mosaic (four rotating real-robot cells, `data-pool` JSON per cell) · uncertainty-live (curve drawn in sync with the Push-T clip; `data-lead` seconds of lead)
                            panel-toggle (Demonstrated / Emergent) · sync-compare (lockstep pair)
                            section-spy (nav) · scroll-progress · copy-bibtex · main (Lenis)
 assets/videos/<group>/     H.264 mp4, speed-ups baked in (jigsaw 2×, cooking 2×, table 6×)
@@ -32,6 +32,10 @@ python3 tools/fill_dims.py     # width/height on <img> from assets/images/manife
 python3 tools/validate.py      # asset existence (exact case), ?v= uniformity, attribute hygiene, budget
 python3 tools/bump_version.py  # bump data-asset-v and every ?v=
 ```
+
+Page order: hero (title · authors · real-robot mosaic · headline stats) → How it works (live Fig. 7B) → §01–§04 → Abstract → Platforms → Cite.
+
+Fig. 2 (`learning_faster`) is built from the paper's PNG export rather than its stale PDF (`PNG_SOURCES` in `tools/build_figs.sh`).
 
 Dev server: `python3 -m http.server 8480 --directory .` (registered as `aura-site` in the shared launch config). Append `?static=1` for a deterministic render (everything revealed, both tab panels shown, no autoplay) when taking screenshots.
 
