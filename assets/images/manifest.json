@@ -1,25 +1,134 @@
 {
-  "images/overview": {"w": 2407, "h": 2125, "png": 3150576, "webp": 404764},
-  "images/framework": {"w": 2417, "h": 2866, "png": 1283196, "webp": 228538},
-  "images/fig_learning": {"w": 2353, "h": 2160, "png": 771764, "webp": 205200},
-  "images/fig_multimodal_swap": {"w": 2423, "h": 1541, "png": 1458152, "webp": 205154},
-  "images/fig_multimodal_sim": {"w": 2380, "h": 1914, "png": 1203280, "webp": 209754},
-  "images/fig_inference": {"w": 2352, "h": 2546, "png": 900415, "webp": 193354},
-  "images/fig_emergence": {"w": 2392, "h": 2630, "png": 3481865, "webp": 385858},
-  "images/fig_cooking": {"w": 2326, "h": 2243, "png": 5466046, "webp": 575166},
-  "images/appendix/sup_infer": {"w": 2393, "h": 1233, "png": 1520988, "webp": 174898},
-  "images/appendix/appen_wei_BP": {"w": 2353, "h": 1455, "png": 1197163, "webp": 132218},
-  "images/appendix/appen_behavior_generation": {"w": 2409, "h": 1117, "png": 783053, "webp": 190624},
-  "images/appendix/ablation_study": {"w": 2377, "h": 2322, "png": 624325, "webp": 142844},
-  "images/appendix/2d_navi_compared": {"w": 2358, "h": 2490, "png": 2023455, "webp": 319942},
-  "images/appendix/appen_2d_navi_long": {"w": 2400, "h": 2196, "png": 2344040, "webp": 363816},
-  "images/appendix/appen_spread": {"w": 2383, "h": 640, "png": 202276, "webp": 82736},
-  "images/fig_jigsaw_modes": {"w": 2499, "h": 1364, "png": 1627193, "webp": 169628},
-  "images/framework_a": {"w": 2415, "h": 1922, "png": 848687, "webp": 155560},
-  "images/fig_uncertainty_curve": {"w": 2415, "h": 953, "png": 434641, "webp": 74590},
-  "images/overview_a": {"w": 1202, "h": 588, "png": 200063, "webp": 45224},
-  "images/overview_c": {"w": 1184, "h": 528, "png": 669324, "webp": 80024},
-  "images/overview_d": {"w": 1198, "h": 529, "png": 345444, "webp": 44250},
-  "logos/mars_lab": {"w": 480, "h": 203, "png": 24138, "webp": 10650},
-  "logos/mars_lab_white": {"w": 480, "h": 203, "png": 24892, "webp": 13544}
+  "images/overview": {
+    "w": 2111,
+    "h": 1866,
+    "png": 2493179,
+    "webp": 331502
+  },
+  "images/framework": {
+    "w": 2417,
+    "h": 2866,
+    "png": 1283196,
+    "webp": 228538
+  },
+  "images/fig_learning": {
+    "w": 2353,
+    "h": 2160,
+    "png": 772121,
+    "webp": 205732
+  },
+  "images/fig_multimodal_swap": {
+    "w": 2423,
+    "h": 1541,
+    "png": 1458152,
+    "webp": 205154
+  },
+  "images/fig_multimodal_sim": {
+    "w": 2380,
+    "h": 1914,
+    "png": 1203280,
+    "webp": 209754
+  },
+  "images/fig_inference": {
+    "w": 2352,
+    "h": 2546,
+    "png": 900415,
+    "webp": 193354
+  },
+  "images/fig_emergence": {
+    "w": 2392,
+    "h": 2630,
+    "png": 3481865,
+    "webp": 385858
+  },
+  "images/fig_cooking": {
+    "w": 2368,
+    "h": 2253,
+    "png": 4386947,
+    "webp": 417368
+  },
+  "images/appendix/sup_infer": {
+    "w": 2393,
+    "h": 1233,
+    "png": 1520988,
+    "webp": 174898
+  },
+  "images/appendix/appen_wei_BP": {
+    "w": 2353,
+    "h": 1455,
+    "png": 1197163,
+    "webp": 132218
+  },
+  "images/appendix/appen_behavior_generation": {
+    "w": 2409,
+    "h": 1117,
+    "png": 783053,
+    "webp": 190624
+  },
+  "images/appendix/ablation_study": {
+    "w": 2377,
+    "h": 2322,
+    "png": 624325,
+    "webp": 142844
+  },
+  "images/appendix/2d_navi_compared": {
+    "w": 2358,
+    "h": 2490,
+    "png": 2023455,
+    "webp": 319942
+  },
+  "images/appendix/appen_2d_navi_long": {
+    "w": 2400,
+    "h": 2196,
+    "png": 2344040,
+    "webp": 363816
+  },
+  "images/appendix/appen_spread": {
+    "w": 2383,
+    "h": 640,
+    "png": 202276,
+    "webp": 82736
+  },
+  "images/fig_jigsaw_modes": {
+    "w": 2499,
+    "h": 1364,
+    "png": 1627193,
+    "webp": 169628
+  },
+  "images/framework_a": {
+    "w": 2415,
+    "h": 1845,
+    "png": 837194,
+    "webp": 150248
+  },
+  "images/fig_uncertainty_curve": {
+    "w": 2415,
+    "h": 881,
+    "png": 418771,
+    "webp": 70330
+  },
+  "images/overview_fast": {
+    "w": 1003,
+    "h": 405,
+    "png": 267836,
+    "webp": 32184
+  },
+  "images/fig_blockpush_curve": {
+    "w": 2274,
+    "h": 747,
+    "png": 559189,
+    "webp": 53910
+  },
+  "logos/mars_lab": {
+    "w": 480,
+    "h": 203,
+    "png": 24138,
+    "webp": 10650
+  },
+  "logos/mars_lab_white": {
+    "w": 480,
+    "h": 203,
+    "png": 24892,
+    "webp": 13544
+  }
 }

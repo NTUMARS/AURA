@@ -1,9 +1,9 @@
 /* AURA — live uncertainty plate ([data-live]).
-   A Push-T rollout plays beside a chart that draws the paper's inferred
-   uncertainty profile (Fig. 7B) progressively: at clip progress t/T the
+   A rollout plays beside a chart that draws the paper's inferred
+   uncertainty profile progressively: at clip progress t/T the
    curve is drawn up to the aligned progress p, with a head marker and a
    live read-out. The curve is a pure function of p, so pausing, scrubbing
-   and looping all stay consistent. Data: assets/data/pusht_uncertainty.json.
+   and looping all stay consistent. Data: the JSON named in data-src (assets/data/*_uncertainty.json).
    Exposes window.AURA_live for tests. */
 (function () {
   const root = document.documentElement;
@@ -92,11 +92,15 @@
     const readTheme = () => {
       const cs = getComputedStyle(block);
       const g = (k, d) => (cs.getPropertyValue(k) || d).trim();
+      // one colour per mode: `--live-<mode>` from the stylesheet, else the
+      // colour the data file carries, else ink
+      const modes = {};
+      Object.keys((data && data.modes) || {}).forEach((k) => { modes[k] = g('--live-' + k, (data.modes[k].color || '')) || '#101418'; });
       theme = {
         ink: g('--text-display', '#101418'), muted: g('--text-muted', '#6B737C'),
         border: g('--border', '#E1E4E8'), borderStrong: g('--border-strong', '#C9CED5'), paper: g('--bg-elev', '#fff'),
         mono: g('--mono', 'ui-monospace, monospace'),
-        modes: { upper: g('--live-upper', '#3A948E'), lower: g('--live-lower', '#3F7FB5') },
+        modes,
       };
     };
     const measure = () => {
@@ -277,7 +281,7 @@
         readTheme(); measure();
         const active = chips.find((c) => c.classList.contains('is-active')) || chips[0];
         setMode(active ? active.dataset.liveMode : Object.keys(data.modes)[0], { swapVideo: false });
-        if (note) note.textContent = data.source === 'figure-digitized' ? 'Profile: Fig. 7B mean over 20 rollouts, aligned to this rollout’s branch and push moments' : '';
+        if (note) note.textContent = data.note || (data.source === 'figure-digitized' ? 'Profile: paper mean over 20 rollouts, aligned to this rollout’s key moments' : '');
         block.classList.add('is-live');
         bind();
         render();

@@ -465,7 +465,7 @@ def main():
 
     today = datetime.date.today().isoformat()
     provenance = (
-        f"Digitized from Fig. 7B (assets/images/fig_uncertainty_curve.png) by "
+        f"Digitized from the paper's 'Adaptive w on Push-T' panel (assets/images/fig_uncertainty_curve.png) by "
         f"tools/digitize_curve.py on {today}; N={args.n}; calibration "
         f"x=(col-{COL0})/{COL_SCALE}, y=({ROW0}-row)/{ROW_SCALE}; band = shaded "
         f"±s.d. envelope; align = piecewise-linear map from clip-time "

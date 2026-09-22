@@ -515,6 +515,37 @@
   color: var(--text-muted);
   line-height: 1.45;
 }
+/* "up to" qualifier set small inside the big numeral */
+.stat__pre {
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 0.3em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  vertical-align: 0.42em;
+  margin-right: 0.15em;
+}
+/* the three long-horizon tasks, as quiet pills under the emergence stat */
+.stat__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: var(--s-3);
+}
+.stat__chips i {
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  color: var(--teal-hot);
+  background: var(--teal-soft);
+  border: 1px solid var(--teal-line);
+  border-radius: var(--r-full);
+  padding: 3px 10px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
 
 /* ============================================================
    Method — three schedule cards + formula line
@@ -1235,8 +1266,7 @@
   .hero__cta .btn { flex: 1 1 40%; }
 }
 
-/* cooking clips are ~1024×884 after the banner crop */
-.cmp__media--cook { aspect-ratio: 1024 / 831; }
+/* cooking clips are clean 1024×1024 renders (revision 4): use .cmp__media--sq */
 .stats--2 { grid-template-columns: repeat(2, 1fr); }
 @media (max-width: 520px) { .stats--2 { grid-template-columns: 1fr; } }
 
@@ -1244,6 +1274,23 @@
    Live uncertainty plate — Push-T video beside a curve drawn in sync
    ============================================================ */
 .plate--live .plate__frame { padding: clamp(12px, 1.6vw, 20px); }
+.plate--live + .plate--live { margin-top: var(--s-6); }
+
+/* short editorial bridge before the live plates ("w, watched live") */
+.live-intro { margin: var(--s-9) 0 var(--s-5); max-width: 720px; }
+.live-intro--after { margin-top: var(--s-9); }
+.live-intro__title {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(22px, 2.1vw, 28px);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: var(--text-display);
+  margin: 0 0 var(--s-3);
+}
+.live-intro__title .w { font-family: var(--mono); font-style: italic; font-weight: 500; color: var(--accent); }
+.live-intro__lead { margin: 0; color: var(--text-muted); line-height: 1.6; }
+.live-intro__lead .w { font-family: var(--mono); font-style: italic; color: var(--text-display); }
 .live {
   display: grid;
   grid-template-columns: minmax(0, 4fr) minmax(0, 5fr);

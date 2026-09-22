@@ -55,12 +55,12 @@ SHAKE_A_T=15
 SHAKE_B_SS=15
 SHAKE_B_T=15
 
-# "emergent feature/cooking/*" render banner crop, measured by
-# tools/find_banner_rows.py on 3 test frames (trained/01, emergent/01,
-# emergent/05) -- identical band on all three: top band rows 14-116, bottom
-# band rows 948-1002 of a 1024x1024 frame.
-COOK_TOP=117   # rows to crop off the top (banner + a few rows of scene sliver)
-COOK_BOT=76    # rows to crop off the bottom
+# (Revision 4) The original "emergent feature/cooking/*" renders carried a
+# Chinese text banner (rows 14-116 and 948-1002 of a 1024x1024 frame, see
+# tools/find_banner_rows.py). The clips now used are banner-free re-renders,
+# so no crop is applied; the constants are kept for reference only.
+COOK_TOP=117
+COOK_BOT=76
 
 # ---------------------------------------------------------------------------
 # Encoder commons
@@ -95,15 +95,25 @@ VENC_COMMON=(-c:v libx264 -preset slow -profile:v high -pix_fmt yuv420p -movflag
 # stay true (no hue shift), nothing blown out.
 TONEMAP_TAIL="format=yuv420p,colorlevels=rimin=0.09:bimin=0.06:gimin=0.0,eq=saturation=1.9:contrast=1.12:gamma=1.08"
 
+# Green-screen taming (revision 4): the chroma backdrop behind the R1 Lite
+# read as a glaring, luminous green on the page. `selectivecolor` in absolute
+# mode adds black (and a touch of cyan+magenta, i.e. less pure green) to the
+# *greens* range, with a lighter pass on *cyans* for the blue-green folds of
+# the cloth. The backdrop drops to a deeper, calmer green while the white
+# table, the produce, the cup and the robot are untouched. Tuned against 5
+# candidates on the same frame (/tmp/aura_shots/green_variants.png); the
+# 0.55-black-only version was judged too subtle on the live page.
+GREEN_TAME="selectivecolor=correction_method=absolute:greens=0.35 0 0.35 1.0:cyans=0.15 0 0.15 0.5"
+
 tonemap_vf() {  # $1 = scale filter args, e.g. "-2:720"
-  echo "scale=${1},${TONEMAP_TAIL}"
+  echo "scale=${1},${TONEMAP_TAIL},${GREEN_TAME}"
 }
 
 table_vf() {  # $1 = "hlg" or "sdr"
   if [[ "$1" == "hlg" ]]; then
-    echo "setpts=PTS/6,fps=30,scale=-2:540,${TONEMAP_TAIL}"
+    echo "setpts=PTS/6,fps=30,scale=-2:540,${TONEMAP_TAIL},${GREEN_TAME}"
   else
-    echo "setpts=PTS/6,fps=30,scale=-2:540"
+    echo "setpts=PTS/6,fps=30,scale=-2:540,format=yuv420p,${GREEN_TAME}"
   fi
 }
 
@@ -155,8 +165,8 @@ poster() {
 # =============================================================================
 if group_enabled fast; then
   echo "== fast =="
-  SS=$FAST_AURA_SS run "$SRC/fast and smother/our.mp4" "$DST/fast/aura.mp4" "scale=-2:720" -crf 22 -g 30
-  SS=$FAST_FM_SS T=$FAST_FM_T run "$SRC/fast and smother/FM.mp4"  "$DST/fast/fm.mp4"   "scale=-2:720" -crf 22 -g 30
+  SS=$FAST_AURA_SS run "$SRC/fast and smother/our.mp4" "$DST/fast/aura.mp4" "scale=-2:720,format=yuv420p,${GREEN_TAME}" -crf 22 -g 30
+  SS=$FAST_FM_SS T=$FAST_FM_T run "$SRC/fast and smother/FM.mp4"  "$DST/fast/fm.mp4"   "scale=-2:720,format=yuv420p,${GREEN_TAME}" -crf 22 -g 30
   poster "$DST/fast/aura.mp4" "$POST/fast_aura.jpg" 0
   poster "$DST/fast/fm.mp4"   "$POST/fast_fm.jpg"   0
 fi
@@ -281,33 +291,40 @@ if group_enabled table; then
 fi
 
 # =============================================================================
-# cooking: simulation, 1024x1024 @ 5fps with a Chinese text banner top+bottom
-# that must be cropped away (see COOK_TOP / COOK_BOT above), then 2x speed.
+# cooking: simulation, 1024x1024 @ 5fps, 2x speed. Revision 4 swapped in
+# clean re-renders (no text banner, so COOK_TOP / COOK_BOT above no longer
+# apply) delivered as five WeChat clips; they are identified by order, not
+# by the old Demo_xx / unseen_xx names. Frame-by-frame reading of each clip
+# against paper fig. S6 (A–E, "Cooking" in the Supplementary):
+#   203900_169 (16.0 s)  -> order B  pepper · broccoli · pot · stove   (demonstrated)
+#   203924_353 (21.6 s)  -> order A  pot · stove · pepper · broccoli   (demonstrated)
+#   203930_286 (22.8 s)  -> order C  stove · pot · pepper · broccoli   (demonstrated)
+#   203937_535 (55.0 s)  -> order D  pot · pepper · broccoli · stove   (emergent)
+#   203943_287 (60.8 s)  -> order E  stove · pot · broccoli · pepper   (emergent)
 # Same -r fix as jigsaw: setpts=PTS/2 alone gets frame-dropped back down to
 # the source's 5fps by default, so force -r 10 to keep all frames.
 # =============================================================================
+COOK_SRC="/Users/lijingliang/Downloads/网页视频-仿真"
 if group_enabled cooking; then
   echo "== cooking =="
-  COOK_VF="crop=iw:ih-${COOK_TOP}-${COOK_BOT}:0:${COOK_TOP},setpts=PTS/2,scale=-2:720"
+  COOK_VF="setpts=PTS/2,scale=720:720"
 
   shopt -s nullglob
-  seen01=("$SRC/emergent feature/cooking/trained/训练Demo_01_"*.mp4)
-  seen02=("$SRC/emergent feature/cooking/trained/训练Demo_02_"*.mp4)
-  seen03=("$SRC/emergent feature/cooking/trained/训练Demo_03_"*.mp4)
-  em01=("$SRC/emergent feature/cooking/emergent/MARS_unseen_01_"*.mp4)
-  em05=("$SRC/emergent feature/cooking/emergent/MARS_unseen_05_"*.mp4)
+  cookA=("$COOK_SRC/"*_203924_*.mp4)
+  cookB=("$COOK_SRC/"*_203900_*.mp4)
+  cookC=("$COOK_SRC/"*_203930_*.mp4)
+  cookD=("$COOK_SRC/"*_203937_*.mp4)
+  cookE=("$COOK_SRC/"*_203943_*.mp4)
   shopt -u nullglob
 
-  run "${seen01[0]}" "$DST/cooking/seen_01.mp4"     "$COOK_VF" -r 10 -crf 23 -g 20
-  run "${seen02[0]}" "$DST/cooking/seen_02.mp4"     "$COOK_VF" -r 10 -crf 23 -g 20
-  run "${seen03[0]}" "$DST/cooking/seen_03.mp4"     "$COOK_VF" -r 10 -crf 23 -g 20
-  run "${em01[0]}"   "$DST/cooking/emergent_01.mp4" "$COOK_VF" -r 10 -crf 23 -g 20
-  run "${em05[0]}"   "$DST/cooking/emergent_05.mp4" "$COOK_VF" -r 10 -crf 23 -g 20
-  poster "$DST/cooking/seen_01.mp4"     "$POST/cooking_seen_01.jpg"
-  poster "$DST/cooking/seen_02.mp4"     "$POST/cooking_seen_02.jpg"
-  poster "$DST/cooking/seen_03.mp4"     "$POST/cooking_seen_03.jpg"
-  poster "$DST/cooking/emergent_01.mp4" "$POST/cooking_emergent_01.jpg"
-  poster "$DST/cooking/emergent_05.mp4" "$POST/cooking_emergent_05.jpg"
+  run "${cookA[0]}" "$DST/cooking/order_a.mp4" "$COOK_VF" -r 10 -crf 23 -g 20
+  run "${cookB[0]}" "$DST/cooking/order_b.mp4" "$COOK_VF" -r 10 -crf 23 -g 20
+  run "${cookC[0]}" "$DST/cooking/order_c.mp4" "$COOK_VF" -r 10 -crf 23 -g 20
+  run "${cookD[0]}" "$DST/cooking/order_d.mp4" "$COOK_VF" -r 10 -crf 23 -g 20
+  run "${cookE[0]}" "$DST/cooking/order_e.mp4" "$COOK_VF" -r 10 -crf 23 -g 20
+  for o in a b c d e; do
+    poster "$DST/cooking/order_$o.mp4" "$POST/cooking_order_$o.jpg"
+  done
 fi
 
 echo "done."

@@ -65,11 +65,17 @@ fi
 # See PR/report notes for how these were located (white-gap scanning +
 # visual confirmation via Read tool on cropped previews).
 # ---------------------------------------------------------------------------
-FRAMEWORK_A_GEOM="2417x1900+0+0"      # panel A "Policy structure": full width, top to the whitespace gap just above the "B Adaptive w on Push-T" label
-FRAMEWORK_B_GEOM="2417x966+0+1900"    # panel B "Adaptive w on Push-T" (label + chart): full width, gap to bottom
-OVERVIEW_A_GEOM="1190x564+0+0"        # panel A "biological motivation" (human figures + High<->Low bar): top-left quadrant only
-OVERVIEW_C_GEOM="1190x480+0+1122"     # panel C "AURA maintains multimodality..." (3 Pick Cup frames): mid-left row
-OVERVIEW_D_GEOM="1217x535+1190+0"     # panel D "AURA acts faster and smoother": top-right, title+trajectories+colorbar, stops before the dashed separator/panel E
+#
+# Panel letters ("A", "B", "C" …) are cropped away on purpose: the site
+# numbers its figures in page order, so a stray paper letter would only
+# confuse. Row/column bounds were read off dark-pixel profiles of the
+# finished PNGs (framework.png 2417x2866, overview.png 2111x1866,
+# appendix/appen_wei_BP.png 2353x1455).
+# ---------------------------------------------------------------------------
+FRAMEWORK_A_GEOM="2417x1812+0+96"     # panel A box only: header "A Policy structure" occupies rows 24-91, the rounded box rows 101-1898
+FRAMEWORK_B_GEOM="2417x860+0+2006"    # panel B chart only: header "B Adaptive w on Push-T" occupies rows 1937-2004, chart rows 2009-2842
+OVERVIEW_FAST_GEOM="960x372+1130+98"  # panel "AURA acts faster and smoother" (trajectories + colorbar), rows 109-461 / cols 1140-2083; header row 41-76 and its "C" letter excluded
+BP_CURVE_GEOM="2230x718+20+728"       # appen_wei_BP panel C chart (rows 742-1421) without its "C Evolution of inferred uncertainty" header (rows 652-703)
 
 WEBP_MAX_BYTES=$((900 * 1024))
 
@@ -179,7 +185,7 @@ FIGURES=(
 
 # Figures the paper embeds as PNG rather than PDF (\includegraphics{Figs/<stem>.png});
 # their PDFs in _src/figs are stale, so the PNG is the source of truth for these.
-PNG_SOURCES=("learning_faster")
+PNG_SOURCES=("learning_faster" "first_fig")
 
 for entry in "${FIGURES[@]}"; do
   stem="${entry%%|*}"
@@ -243,23 +249,20 @@ finish_png "$fb_raw" "$IMG/fig_uncertainty_curve.png" "$IMG/fig_uncertainty_curv
 OVERVIEW_PNG="$IMG/overview.png"
 [[ -f "$OVERVIEW_PNG" ]] || { echo "ERROR: overview.png missing, cannot crop panels from it" >&2; exit 1; }
 
-oa_raw="$TMP/overview_a_raw.png"
-if need_build "$IMG/overview_a.png" "$IMG/overview_a.webp"; then
-  "$MAGICK" "$OVERVIEW_PNG" -crop "$OVERVIEW_A_GEOM" +repage "$oa_raw"
+of_raw="$TMP/overview_fast_raw.png"
+if need_build "$IMG/overview_fast.png" "$IMG/overview_fast.webp"; then
+  "$MAGICK" "$OVERVIEW_PNG" -crop "$OVERVIEW_FAST_GEOM" +repage "$of_raw"
 fi
-finish_png "$oa_raw" "$IMG/overview_a.png" "$IMG/overview_a.webp" "images/overview_a"
+finish_png "$of_raw" "$IMG/overview_fast.png" "$IMG/overview_fast.webp" "images/overview_fast"
 
-oc_raw="$TMP/overview_c_raw.png"
-if need_build "$IMG/overview_c.png" "$IMG/overview_c.webp"; then
-  "$MAGICK" "$OVERVIEW_PNG" -crop "$OVERVIEW_C_GEOM" +repage "$oc_raw"
-fi
-finish_png "$oc_raw" "$IMG/overview_c.png" "$IMG/overview_c.webp" "images/overview_c"
+BP_PNG="$APX/appen_wei_BP.png"
+[[ -f "$BP_PNG" ]] || { echo "ERROR: appendix/appen_wei_BP.png missing, cannot crop panels from it" >&2; exit 1; }
 
-od_raw="$TMP/overview_d_raw.png"
-if need_build "$IMG/overview_d.png" "$IMG/overview_d.webp"; then
-  "$MAGICK" "$OVERVIEW_PNG" -crop "$OVERVIEW_D_GEOM" +repage "$od_raw"
+bpc_raw="$TMP/bp_curve_raw.png"
+if need_build "$IMG/fig_blockpush_curve.png" "$IMG/fig_blockpush_curve.webp"; then
+  "$MAGICK" "$BP_PNG" -crop "$BP_CURVE_GEOM" +repage "$bpc_raw"
 fi
-finish_png "$od_raw" "$IMG/overview_d.png" "$IMG/overview_d.webp" "images/overview_d"
+finish_png "$bpc_raw" "$IMG/fig_blockpush_curve.png" "$IMG/fig_blockpush_curve.webp" "images/fig_blockpush_curve"
 
 # ---------------------------------------------------------------------------
 # Lab logos: resize + webp, alpha preserved (no white flatten/border --

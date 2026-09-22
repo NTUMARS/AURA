@@ -27,9 +27,11 @@
   --teal-line:      rgba(42, 127, 138, 0.45);
   --axis: linear-gradient(90deg, #B23A2A 0%, #D3D8DF 50%, #2A7F8A 100%);
 
-  /* --- live chart mode colours (Fig. 7B hues, deepened for contrast on white) --- */
-  --live-upper:     #3A948E;
-  --live-lower:     #3F7FB5;
+  /* --- live chart mode colours (paper hues, deepened for contrast on white) --- */
+  --live-upper:     #3A948E;   /* Push-T, upper edge */
+  --live-lower:     #3F7FB5;   /* Push-T, lower edge */
+  --live-orange:    #D08A2B;   /* Block Push, orange block */
+  --live-purple:    #6E62B8;   /* Block Push, purple block */
 
   /* --- ink buttons --- */
   --ink-btn:        #0B0D10;

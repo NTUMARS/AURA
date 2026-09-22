@@ -16,7 +16,7 @@ scripts/                   reveal · lazy-video · comparison (tile control bar)
 assets/videos/<group>/     H.264 mp4, speed-ups baked in (jigsaw 2×, cooking 2×, table 6×)
 assets/posters/            one JPG per clip  (<group>_<name>.jpg)
 assets/images/             paper figures rasterised from the PDFs → PNG + WebP, manifest.json for sizes
-assets/data/               pusht_uncertainty.json — Fig. 7B digitized (tools/digitize_curve.py); swap in a per-step rollout log when available
+assets/data/               {pusht,blockpush}_uncertainty.json — adaptive-w̄ curves digitized from the paper (tools/digitize_curve.py, tools/digitize_blockpush.py); swap in per-step rollout logs when available
 tools/                     build_figs.sh · build_media.sh · report_media.sh · digitize_curve.py · fill_dims.py · validate.py · bump_version.py
 _src/                      gitignored scratch (figure sources, contact sheets, previews)
 ```
@@ -27,13 +27,14 @@ _src/                      gitignored scratch (figure sources, contact sheets, p
 tools/build_figs.sh            # needs pdftocairo, magick, cwebp, PIL; sources in _src/figs
 tools/build_media.sh           # needs ffmpeg 9; sources in ~/Downloads/website (first author's clips)
 tools/report_media.sh          # size / duration table, budget gate
-python3 tools/digitize_curve.py --debug _src/digitize_overlay.png   # Fig. 7B → assets/data/pusht_uncertainty.json
+python3 tools/digitize_curve.py --debug _src/digitize_overlay.png   # Push-T w̄ panel → assets/data/pusht_uncertainty.json
+python3 tools/digitize_blockpush.py                                 # appendix Block Push w̄ panel → assets/data/blockpush_uncertainty.json
 python3 tools/fill_dims.py     # width/height on <img> from assets/images/manifest.json
 python3 tools/validate.py      # asset existence (exact case), ?v= uniformity, attribute hygiene, budget
 python3 tools/bump_version.py  # bump data-asset-v and every ?v=
 ```
 
-Page order: hero (title · authors · real-robot mosaic · headline stats) → How it works (live Fig. 7B) → §01–§04 → Abstract → Platforms → Cite.
+Page order: hero (title · authors · real-robot mosaic · headline stats) → How it works (policy structure · two live w̄ plates: Push-T, Block Push · three schedules) → §01–§04 → Platforms → Cite. Figures are numbered in page order (Fig. 1–11).
 
 Fig. 2 (`learning_faster`) is built from the paper's PNG export rather than its stale PDF (`PNG_SOURCES` in `tools/build_figs.sh`).
 
