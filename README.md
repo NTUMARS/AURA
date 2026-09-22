@@ -2,7 +2,7 @@
 
 Static project page for **"Adaptive Uncertainty Enables Emergent Robot Behaviors Without Scaling"** (AURA: Adaptive Uncertainty for Robotic Actions), MARS Lab, Nanyang Technological University.
 
-Live: https://jingliangli.com/AURA/ (GitHub Pages, `main` / root, custom domain inherited from the user site; every asset URL is relative).
+Live: https://ntumars.github.io/AURA/ (GitHub Pages on NTUMARS/AURA, `main` / root; every asset URL is relative). The former address https://jingliangli.com/AURA/ redirects here.
 
 ## Layout
 
