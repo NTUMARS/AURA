@@ -515,36 +515,40 @@
   color: var(--text-muted);
   line-height: 1.45;
 }
+/* --- hero variant: one colour (burnt orange) for all four, numeral on its
+   own line, unit set as a quiet mono caption beneath it. Symbols (×, %) are
+   demoted to ~0.6em so the digits carry the row. --- */
+.stats--hero { --stat-accent: var(--orange); }
+.stats--hero .stat::before { background: var(--stat-accent); }
+.stats--hero .stat__value { display: block; }
+.stats--hero .stat__num { display: block; }
+.stats--hero .stat__unit {
+  display: block;
+  margin-top: 10px;
+  font-size: 12.5px;
+  letter-spacing: 0.14em;
+  color: var(--stat-accent);
+}
+.stats--hero .stat__label { margin-top: var(--s-3); font-size: 16.5px; letter-spacing: -0.005em; }
+.stats--hero .stat__note { margin-top: 6px; font-size: 14.5px; }
+.stats--hero .stat__label i { font-style: normal; color: var(--stat-accent); font-weight: 500; }
+.stat__sym {
+  font-size: 0.62em;
+  font-weight: 500;
+  letter-spacing: 0;
+  margin-left: 0.03em;
+  color: var(--text-soft);
+}
 /* "up to" qualifier set small inside the big numeral */
 .stat__pre {
   font-family: var(--mono);
   font-weight: 500;
-  font-size: 0.3em;
-  letter-spacing: 0.1em;
+  font-size: 0.28em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-muted);
-  vertical-align: 0.42em;
-  margin-right: 0.15em;
-}
-/* the three long-horizon tasks, as quiet pills under the emergence stat */
-.stat__chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: var(--s-3);
-}
-.stat__chips i {
-  font-style: normal;
-  font-family: var(--mono);
-  font-size: 12.5px;
-  letter-spacing: 0.04em;
-  color: var(--teal-hot);
-  background: var(--teal-soft);
-  border: 1px solid var(--teal-line);
-  border-radius: var(--r-full);
-  padding: 3px 10px;
-  line-height: 1.4;
-  white-space: nowrap;
+  vertical-align: 0.5em;
+  margin-right: 0.22em;
 }
 
 /* ============================================================
@@ -1103,6 +1107,39 @@
   opacity: 0.8;
 }
 .toggle__panel[hidden] { display: none; }
+
+/* static key used where every clip is shown at once (Cooking) */
+.legend { display: inline-flex; flex-wrap: wrap; gap: var(--s-4); }
+.legend__item {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: var(--text-xs); letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text-soft);
+}
+.legend__item::before { content: ""; width: 10px; height: 10px; border-radius: 2px; background: var(--accent); }
+.legend__item--emergent::before { background: var(--teal); }
+.legend__item b { font-weight: 500; color: var(--text-display); }
+
+/* results ledger: fills the sixth cell of the 3×2 cooking grid */
+.ledger {
+  align-self: start;
+  aspect-ratio: 1 / 1;                       /* squares up with the clips beside it */
+  box-sizing: border-box;
+  display: flex; flex-direction: column; justify-content: space-between; gap: var(--s-3);
+  padding: var(--s-5) var(--s-5) var(--s-4);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-md);
+  background: var(--bg-elev-2);
+}
+.ledger__row { display: flex; flex-direction: column; gap: 3px; padding-top: var(--s-4); border-top: 1px solid var(--border); }
+.ledger__row:first-child { padding-top: 0; border-top: 0; }
+.ledger__num {
+  font-family: var(--display); font-weight: 600; font-size: clamp(30px, 2.4vw, 38px);
+  line-height: 1; letter-spacing: -0.03em; color: var(--text-display); font-variant-numeric: tabular-nums;
+}
+.ledger__of { font-size: 0.5em; font-weight: 500; color: var(--text-muted); margin-left: 2px; letter-spacing: 0; }
+.ledger__row--emergent .ledger__num { color: var(--teal); }
+.ledger__what { font-size: 15px; font-weight: 500; color: var(--text-display); line-height: 1.35; }
+.ledger__how { font-family: var(--mono); font-size: var(--text-2xs); letter-spacing: 0.04em; color: var(--text-muted); line-height: 1.45; }
 .toggle__desc { font-size: var(--text-sm); color: var(--text-soft); line-height: 1.6; max-width: 66ch; margin: 0 0 var(--s-5); }
 .toggle__desc b { color: var(--text-display); font-weight: 600; }
 .is-static .toggle__panel + .toggle__panel, .no-js .toggle__panel + .toggle__panel { margin-top: var(--s-5); }

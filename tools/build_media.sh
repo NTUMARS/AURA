@@ -95,25 +95,42 @@ VENC_COMMON=(-c:v libx264 -preset slow -profile:v high -pix_fmt yuv420p -movflag
 # stay true (no hue shift), nothing blown out.
 TONEMAP_TAIL="format=yuv420p,colorlevels=rimin=0.09:bimin=0.06:gimin=0.0,eq=saturation=1.9:contrast=1.12:gamma=1.08"
 
-# Green-screen taming (revision 4): the chroma backdrop behind the R1 Lite
-# read as a glaring, luminous green on the page. `selectivecolor` in absolute
-# mode adds black (and a touch of cyan+magenta, i.e. less pure green) to the
-# *greens* range, with a lighter pass on *cyans* for the blue-green folds of
-# the cloth. The backdrop drops to a deeper, calmer green while the white
-# table, the produce, the cup and the robot are untouched. Tuned against 5
-# candidates on the same frame (/tmp/aura_shots/green_variants.png); the
-# 0.55-black-only version was judged too subtle on the live page.
-GREEN_TAME="selectivecolor=correction_method=absolute:greens=0.35 0 0.35 1.0:cyans=0.15 0 0.15 0.5"
+# Green-screen taming (revision 5): the chroma backdrop behind the R1 Lite
+# read as a glaring, luminous green on the page. We now darken it as a pure
+# *brightness* change -- no hue or saturation shift -- and normalise every
+# green-screen clip to the same backdrop level so SDR and HLG-tonemapped
+# sources look identical on the page.
+#
+# Mechanism: Y/Cb/Cr are scaled about their neutral points by the same
+# factor F wherever a chroma-hue mask fires (equivalent to multiplying
+# RGB by F -> luminance x F, hue and saturation unchanged). The mask is
+# brightness-independent: Cr strongly negative, Cb at/below neutral, chroma
+# large relative to luma. White cloth, produce, teal cup, robot and shadows
+# never enter it. F is measured per clip by tools/green_level.py so the
+# backdrop's mean relative luminance lands on one target (0.22) for all
+# clips. Two-pass: pass 1 writes the un-darkened chain to $SCRATCH/pre at a
+# near-lossless CRF, pass 2 probes it and applies green_vf.
+# The mask is built from per-plane LUTs and blend modes (all SIMD C, ~5x
+# cheaper than an equivalent `geq` expression; verified pixel-equivalent,
+# mean |diff| 0.04/255 on a test frame):
+#   ku = (Cb <= -2)  and  (Cb >= -37)         soft ramps of 5 and 8 levels
+#   kv = (Cr <= -6)                            soft ramp of 8 levels
+#   kc = (-Cr - 0.13*(Y-16)) >= 6              soft ramp of 6 levels
+#   mask = ku * kv * kc ;  out = maskedmerge(orig, orig*F, mask)
+green_vf() {  # $1 = luminance factor F in (0,1]
+  local F="$1"
+  echo "format=yuv444p,split=3[o][d][m];[d]lutyuv=y='16+(val-16)*${F}':u='128+(val-128)*${F}':v='128+(val-128)*${F}'[dark];[m]extractplanes=y+u+v[my][mu][mv];[mu]lut=c0='clip((131-val)*51,0,255)*clip((val-83)*32,0,255)/255'[ku];[mv]split[mv1][mv2];[mv1]lut=c0='clip((122-val)*32,0,255)'[kv];[mv2]lut=c0='clip(128-val,0,255)'[negv];[my]lut=c0='clip(0.13*(val-16),0,255)'[ys];[negv][ys]blend=all_mode=subtract[dd];[dd]lut=c0='clip(val*42,0,255)'[kc];[ku][kv]blend=all_mode=multiply[k1];[k1][kc]blend=all_mode=multiply,split=3[k2a][k2b][k2c];[k2a][k2b][k2c]mergeplanes=0x001020:yuv444p[mask];[o][dark][mask]maskedmerge,format=yuv420p"
+}
 
 tonemap_vf() {  # $1 = scale filter args, e.g. "-2:720"
-  echo "scale=${1},${TONEMAP_TAIL},${GREEN_TAME}"
+  echo "scale=${1},${TONEMAP_TAIL}"
 }
 
 table_vf() {  # $1 = "hlg" or "sdr"
   if [[ "$1" == "hlg" ]]; then
-    echo "setpts=PTS/6,fps=30,scale=-2:540,${TONEMAP_TAIL},${GREEN_TAME}"
+    echo "setpts=PTS/6,fps=30,scale=-2:540,${TONEMAP_TAIL}"
   else
-    echo "setpts=PTS/6,fps=30,scale=-2:540,format=yuv420p,${GREEN_TAME}"
+    echo "setpts=PTS/6,fps=30,scale=-2:540,format=yuv420p"
   fi
 }
 
@@ -125,6 +142,7 @@ group_enabled() {
 # Honours SS / T env vars for trims: SS is applied as a fast input seek
 # (-ss before -i), T as an output-duration cap (-t after -i, before the
 # output file) so it works correctly even after a setpts speed change.
+# GREEN=1 enables the two-pass green-screen darkening described above.
 run() {
   local in="$1" out="$2" vf="$3"; shift 3
   if [[ -f "$out" && "$FORCE" != "1" ]]; then
@@ -142,6 +160,17 @@ run() {
   fi
   if [[ -n "$vf" ]]; then
     args+=(-vf "$vf")
+  fi
+  if [[ "${GREEN:-0}" == "1" ]]; then
+    local pre="$SCRATCH/pre/$(basename "$(dirname "$out")")_$(basename "$out")"
+    mkdir -p "$(dirname "$pre")"
+    echo "pass 1 -> $pre"
+    ffmpeg "${args[@]}" "${VENC_COMMON[@]}" -preset veryfast -crf 14 -g 30 "$pre"   # intermediate: speed over size
+    local f
+    f="$(python3 "$ROOT/tools/green_level.py" "$pre")"
+    echo "pass 2 (green x$f) -> $out"
+    ffmpeg -y -hide_banner -loglevel error -threads 0 -i "$pre" -filter_complex "$(green_vf "$f")" "${VENC_COMMON[@]}" "$@" "$out"
+    return 0
   fi
   args+=("${VENC_COMMON[@]}" "$@" "$out")
   echo "encode -> $out"
@@ -165,8 +194,8 @@ poster() {
 # =============================================================================
 if group_enabled fast; then
   echo "== fast =="
-  SS=$FAST_AURA_SS run "$SRC/fast and smother/our.mp4" "$DST/fast/aura.mp4" "scale=-2:720,format=yuv420p,${GREEN_TAME}" -crf 22 -g 30
-  SS=$FAST_FM_SS T=$FAST_FM_T run "$SRC/fast and smother/FM.mp4"  "$DST/fast/fm.mp4"   "scale=-2:720,format=yuv420p,${GREEN_TAME}" -crf 22 -g 30
+  GREEN=1 SS=$FAST_AURA_SS run "$SRC/fast and smother/our.mp4" "$DST/fast/aura.mp4" "scale=-2:720,format=yuv420p" -crf 22 -g 30
+  GREEN=1 SS=$FAST_FM_SS T=$FAST_FM_T run "$SRC/fast and smother/FM.mp4"  "$DST/fast/fm.mp4"   "scale=-2:720,format=yuv420p" -crf 22 -g 30
   poster "$DST/fast/aura.mp4" "$POST/fast_aura.jpg" 0
   poster "$DST/fast/fm.mp4"   "$POST/fast_fm.jpg"   0
 fi
@@ -176,10 +205,10 @@ fi
 # =============================================================================
 if group_enabled pickcup; then
   echo "== pickcup =="
-  run "$SRC/multimodal feature/pick cup/rim1.mp4"    "$DST/pickcup/rim1.mp4"    "$(tonemap_vf -2:720)" -crf 23 -g 60
-  run "$SRC/multimodal feature/pick cup/rim2.mp4"    "$DST/pickcup/rim2.mp4"    "$(tonemap_vf -2:720)" -crf 23 -g 60
-  run "$SRC/multimodal feature/pick cup/handle2.mp4" "$DST/pickcup/handle2.mp4" "$(tonemap_vf -2:720)" -crf 23 -g 60
-  run "$SRC/multimodal feature/pick cup/handle3.mp4" "$DST/pickcup/handle3.mp4" "$(tonemap_vf -2:720)" -crf 23 -g 60
+  GREEN=1 run "$SRC/multimodal feature/pick cup/rim1.mp4"    "$DST/pickcup/rim1.mp4"    "$(tonemap_vf -2:720)" -crf 23 -g 60
+  GREEN=1 run "$SRC/multimodal feature/pick cup/rim2.mp4"    "$DST/pickcup/rim2.mp4"    "$(tonemap_vf -2:720)" -crf 23 -g 60
+  GREEN=1 run "$SRC/multimodal feature/pick cup/handle2.mp4" "$DST/pickcup/handle2.mp4" "$(tonemap_vf -2:720)" -crf 23 -g 60
+  GREEN=1 run "$SRC/multimodal feature/pick cup/handle3.mp4" "$DST/pickcup/handle3.mp4" "$(tonemap_vf -2:720)" -crf 23 -g 60
   poster "$DST/pickcup/rim1.mp4"    "$POST/pickcup_rim1.jpg"
   poster "$DST/pickcup/rim2.mp4"    "$POST/pickcup_rim2.jpg"
   poster "$DST/pickcup/handle2.mp4" "$POST/pickcup_handle2.jpg"
@@ -195,12 +224,12 @@ fi
 # =============================================================================
 if group_enabled pickveg; then
   echo "== pickveg =="
-  run "$SRC/multimodal feature/pick vegetable/pick red.mp4"   "$DST/pickveg/carrot.mp4" "$(tonemap_vf -2:720)" -crf 23 -g 60
-  run "$SRC/multimodal feature/pick vegetable/pick white.mp4" "$DST/pickveg/daikon.mp4" "$(tonemap_vf -2:720)" -crf 23 -g 60
-  SS=$SHAKE_A_SS T=$SHAKE_A_T run \
+  GREEN=1 run "$SRC/multimodal feature/pick vegetable/pick red.mp4"   "$DST/pickveg/carrot.mp4" "$(tonemap_vf -2:720)" -crf 23 -g 60
+  GREEN=1 run "$SRC/multimodal feature/pick vegetable/pick white.mp4" "$DST/pickveg/daikon.mp4" "$(tonemap_vf -2:720)" -crf 23 -g 60
+  GREEN=1 SS=$SHAKE_A_SS T=$SHAKE_A_T run \
     "$SRC/multimodal feature/pick vegetable/FM shake on lower epochs/121548c4803f057af64b8dc0eace1728_raw.mp4" \
     "$DST/pickveg/fm_shake_a.mp4" "$(tonemap_vf -2:720)" -crf 23 -g 60
-  SS=$SHAKE_B_SS T=$SHAKE_B_T run \
+  GREEN=1 SS=$SHAKE_B_SS T=$SHAKE_B_T run \
     "$SRC/multimodal feature/pick vegetable/FM shake on lower epochs/8004070cbd2fddb6ae62855e90f9ce86_raw.mp4" \
     "$DST/pickveg/fm_shake_b.mp4" "$(tonemap_vf -2:720)" -crf 23 -g 60
   poster "$DST/pickveg/carrot.mp4"     "$POST/pickveg_carrot.jpg"
@@ -278,11 +307,11 @@ fi
 # =============================================================================
 if group_enabled table; then
   echo "== table =="
-  run "$SRC/emergent feature/table/trained/1234.mp4"   "$DST/table/seen_1234.mp4"       "$(table_vf sdr)" -crf 24 -g 60
-  run "$SRC/emergent feature/table/trained/2143.mp4"   "$DST/table/seen_2143.mp4"       "$(table_vf hlg)" -crf 24 -g 60
-  run "$SRC/emergent feature/table/emergent/1243.mp4"  "$DST/table/emergent_1243.mp4"   "$(table_vf hlg)" -crf 24 -g 60
-  run "$SRC/emergent feature/table/emergent/2134.mp4"  "$DST/table/emergent_2134.mp4"   "$(table_vf hlg)" -crf 24 -g 60
-  run "$SRC/emergent feature/table/emergent/3214.mp4"  "$DST/table/emergent_3214.mp4"   "$(table_vf hlg)" -crf 24 -g 60
+  GREEN=1 run "$SRC/emergent feature/table/trained/1234.mp4"   "$DST/table/seen_1234.mp4"       "$(table_vf sdr)" -crf 24 -g 60
+  GREEN=1 run "$SRC/emergent feature/table/trained/2143.mp4"   "$DST/table/seen_2143.mp4"       "$(table_vf hlg)" -crf 24 -g 60
+  GREEN=1 run "$SRC/emergent feature/table/emergent/1243.mp4"  "$DST/table/emergent_1243.mp4"   "$(table_vf hlg)" -crf 24 -g 60
+  GREEN=1 run "$SRC/emergent feature/table/emergent/2134.mp4"  "$DST/table/emergent_2134.mp4"   "$(table_vf hlg)" -crf 24 -g 60
+  GREEN=1 run "$SRC/emergent feature/table/emergent/3214.mp4"  "$DST/table/emergent_3214.mp4"   "$(table_vf hlg)" -crf 24 -g 60
   poster "$DST/table/seen_1234.mp4"     "$POST/table_seen_1234.jpg"
   poster "$DST/table/seen_2143.mp4"     "$POST/table_seen_2143.jpg"
   poster "$DST/table/emergent_1243.mp4" "$POST/table_emergent_1243.jpg"

@@ -25,6 +25,8 @@
   --teal-hot:       #216B75;
   --teal-soft:      rgba(42, 127, 138, 0.10);
   --teal-line:      rgba(42, 127, 138, 0.45);
+  --orange:         #C4661E;   /* burnt orange — the hero's headline numbers, one colour for all four */
+  --orange-hot:     #A9551A;
   --axis: linear-gradient(90deg, #B23A2A 0%, #D3D8DF 50%, #2A7F8A 100%);
 
   /* --- live chart mode colours (paper hues, deepened for contrast on white) --- */
