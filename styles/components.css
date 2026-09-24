@@ -306,9 +306,8 @@
   min-height: 0;
 }
 .mosaic__cell--a { grid-column: 1 / 15; grid-row: 1 / 3; }
-.mosaic__cell--b { grid-column: 15 / 25; grid-row: 1; aspect-ratio: 3 / 2; }
-.mosaic__cell--c { grid-column: 15 / 20; grid-row: 2; aspect-ratio: 3 / 2; }
-.mosaic__cell--d { grid-column: 20 / 25; grid-row: 2; aspect-ratio: 3 / 2; }
+.mosaic__cell--c { grid-column: 15 / 25; grid-row: 1; aspect-ratio: 16 / 9; }
+.mosaic__cell--d { grid-column: 15 / 25; grid-row: 2; aspect-ratio: 16 / 9; }
 
 .mosaic__layer {
   position: absolute;
@@ -352,8 +351,6 @@
   pointer-events: none;
 }
 .mosaic__chip[data-tone="teal"] { background: var(--teal); }
-/* small cells: let the label wrap instead of truncating */
-.mosaic__cell--c .mosaic__chip, .mosaic__cell--d .mosaic__chip { white-space: normal; max-width: calc(100% - 24px); line-height: 1.35; }
 
 .mosaic__badge {
   position: absolute;
@@ -409,8 +406,9 @@
 @media (max-width: 900px) {
   .mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; }
   .mosaic__cell--a { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 4 / 3; }
-  .mosaic__cell--b { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 16 / 9; }
   .mosaic__cell--c, .mosaic__cell--d { grid-column: auto; grid-row: auto; aspect-ratio: 4 / 3; }
+  /* half-width cells: let the label wrap instead of truncating */
+  .mosaic__cell--c .mosaic__chip, .mosaic__cell--d .mosaic__chip { white-space: normal; max-width: calc(100% - 24px); line-height: 1.35; }
 }
 @media (max-width: 600px) {
   .mosaic { grid-template-columns: 1fr; }
