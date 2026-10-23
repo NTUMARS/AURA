@@ -641,7 +641,7 @@
       <p class="eyebrow eyebrow--accent">§ 04 · Emergence of novel modes</p>
       <span class="axis-rule"></span>
       <h2 class="section-title">Behaviors <span class="t-soft">no expert demonstrated</span></h2>
-      <p class="section-lead">No skill primitives, no scaling, no external planner. At the uncertain moments between sub-tasks AURA looks back less and stays exploratory, so it can stitch together motion learned in different demonstrations: a puzzle assembled, a table tidied, a meal cooked in an order no expert ever showed, and on a humanoid, walking routes paired with coats in combinations never demonstrated.</p>
+      <p class="section-lead">No skill primitives, no scaling, no external planner. At the uncertain moments between sub-tasks AURA looks back less and stays exploratory, so it can stitch together motion learned in different demonstrations: a puzzle assembled, a table tidied, a meal cooked in an order no expert ever showed. Integrated into a pretrained humanoid foundation model, AURA also pairs walking routes with coats in combinations never demonstrated.</p>
     </header>
 
     <div class="prose" data-reveal>
@@ -774,7 +774,7 @@
           <button class="toggle__tab" role="tab" aria-selected="false" aria-controls="laundry-emergent" data-panel="emergent" type="button" tabindex="-1">Emergent <span class="toggle__count">2</span></button>
         </div>
       </div>
-      <p class="toggle__desc">The same emergence carries over from tabletop arms to whole-body humanoid chores. A Unitree G1 walks around an obstacle on either side, takes one of two coats from a rack and places it into a laundry basket, under whole-body joint control. The 90 demonstrations pair each route with one coat only, 45 each: the left detour with the dark coat and the right detour with the light coat. AURA succeeds in <b>9 of 10 rollouts</b> and, beyond the two demonstrated pairings, also composes the two crossed ones. Clips at 2× speed, cut at the grasp.</p>
+      <p class="toggle__desc">The same emergence carries over from tabletop arms to whole-body humanoid chores. A Unitree G1 with Inspire DFX dexterous hands walks around an obstacle on either side, takes one of two coats from a rack and places it into a laundry basket, driven by a GR00T N1.7 policy fine-tuned with AURA. The 90 demonstrations pair each route with one coat only, 45 each: the left detour with the dark coat and the right detour with the light coat. AURA succeeds in <b>9 of 10 rollouts</b> and, beyond the two demonstrated pairings, also composes the two crossed ones. Because this policy builds on a pretrained backbone, the task shows that AURA fits a complex whole-body system rather than supporting emergence without scaling. Clips at 2× speed, cut at the grasp.</p>
       <div class="toggle__panel cmp cmp--2" id="laundry-seen" role="tabpanel" data-panel="seen">
         <figure class="cmp__tile cmp__tile--ours">
           <div class="cmp__media" data-controls><video src="assets/videos/humanoid/seen_left.mp4?v=14" poster="assets/posters/humanoid_seen_left.jpg?v=14" muted loop playsinline preload="metadata" data-autoplay aria-label="Laundry collection, demonstrated pairing, left detour and dark coat"></video><span class="cmp__badge">2×</span></div>
@@ -847,7 +847,7 @@
       <p class="eyebrow eyebrow--accent">Platforms</p>
       <span class="axis-rule"></span>
       <h2 class="section-title">Three real robots, <span class="t-soft">both control spaces</span></h2>
-      <p class="section-lead">Experiments span joint-space and task-space control under both absolute and incremental action modes, plus RoboVerse and Libero in simulation. The π<sub>0.5</sub> backbone serves only to show that the adaptive mechanism scales; every behavior-emergence result comes from lightweight visuomotor policies trained from scratch.</p>
+      <p class="section-lead">Experiments span joint-space and task-space control under both absolute and incremental action modes, plus RoboVerse and Libero in simulation. The π<sub>0.5</sub> backbone serves only to show that the adaptive mechanism scales; every behavior-emergence result on the arms and in simulation comes from lightweight visuomotor policies trained from scratch. The humanoid policy is fine-tuned from GR00T N1.7 to show that the mechanism fits a complex whole-body system.</p>
     </header>
     <div class="robots">
       <article class="robot" data-reveal>
@@ -882,9 +882,11 @@
           <h3 class="robot__name">Unitree G1 humanoid</h3>
           <p class="robot__tasks">Laundry Collection</p>
           <dl class="robot__specs">
-            <dt>Body</dt><dd>whole body with dexterous hands, walking and manipulation from one policy</dd>
-            <dt>Vision</dt><dd>Intel RealSense D455 RGB camera mounted on the robot</dd>
-            <dt>Actions</dt><dd>whole-body joint commands</dd>
+            <dt>Hands</dt><dd>Inspire DFX dexterous hands</dd>
+            <dt>Policy</dt><dd>GR00T N1.7 fine-tuned with AURA</dd>
+            <dt>Vision</dt><dd>Intel RealSense cameras on the head and chest</dd>
+            <dt>Actions</dt><dd>64-D body motion tokens decoded by SONIC + 6-D state per hand</dd>
+            <dt>Compute</dt><dd>NVIDIA RTX 4090</dd>
           </dl>
         </div>
       </article>
