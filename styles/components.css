@@ -652,6 +652,7 @@
 .plate--flush .plate__frame { padding: 0; }
 .plate--flush .plate__frame img { border-radius: calc(var(--r-md) - 1px); }
 .plate--narrow .plate__frame { max-width: 720px; margin-inline: auto; }
+.overview-video { width: 100%; aspect-ratio: 16 / 9; display: block; background: #fff; border-radius: calc(var(--r-md) - 1px); }
 .plate--compact .plate__frame { max-width: 920px; margin-inline: auto; }
 
 .plate__meta {

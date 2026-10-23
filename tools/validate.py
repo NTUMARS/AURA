@@ -88,7 +88,9 @@ for a in p.links:
 # 3. video hygiene
 for v in p.videos:
     src = v.get('src', '?')
-    for need in ('muted', 'playsinline', 'poster', 'preload'):
+    # a narrated video with controls (the overview) is the one clip allowed to keep its sound
+    needs = ('playsinline', 'poster', 'preload') if 'controls' in v else ('muted', 'playsinline', 'poster', 'preload')
+    for need in needs:
         if need not in v: errors.append(f'<video {src}> lacks {need}')
     if 'autoplay' in v and 'strip' not in src:
         errors.append(f'<video {src}> uses autoplay outside the strip')
