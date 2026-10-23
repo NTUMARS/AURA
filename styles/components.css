@@ -1168,6 +1168,7 @@
    ============================================================ */
 .robots { display: grid; grid-template-columns: 1fr; gap: var(--s-5); }
 @media (min-width: 800px) { .robots { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1100px) { .robots { grid-template-columns: repeat(3, 1fr); } }
 
 .robot {
   display: grid;
