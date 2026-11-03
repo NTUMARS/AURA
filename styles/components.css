@@ -180,6 +180,7 @@
 }
 .hero__affil a { color: inherit; border-bottom: 1px solid var(--border-strong); }
 .hero__affil a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.hero__affil sup { font-family: var(--mono); font-size: 0.66em; color: var(--accent); margin-right: 2px; }
 
 .hero__marks {
   display: flex;
